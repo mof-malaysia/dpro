@@ -14,7 +14,7 @@ import { Page, Berita } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
 const generateTitle: GenerateTitle<Berita | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | dPro` : 'dPro'
+  return doc?.title ? `${doc.title} | d.Pro` : 'd.Pro'
 }
 
 const generateURL: GenerateURL<Berita | Page> = ({ doc }) => {
