@@ -7,7 +7,6 @@ import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/globals/Footer/Component'
 import { Header } from '@/globals/Header/Component'
 import { Masthead } from '@/globals/Header/Masthead'
-import { Locale, locales } from '@/utilities/i18n'
 import { Providers } from '@/providers'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { Inter, Poppins } from 'next/font/google'
@@ -26,25 +25,8 @@ const poppins = Poppins({
   variable: '--font-heading',
 })
 
-type Params = Promise<{ locale: Locale }>
-
-export default async function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode
-  params: Params
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
-
-  const { locale } = (await params) || { locale: 'ms-MY' }
-
-  // Ensure that the incoming `locale` is valid
-  if (!locales.includes(locale)) {
-    notFound()
-  }
-
-  const messages = await getMessages({ locale })
 
   return (
     <html className={cn(inter.className, poppins.variable)} lang="en" suppressHydrationWarning>
@@ -53,7 +35,7 @@ export default async function RootLayout({
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body>
-        <Providers messages={messages}>
+        <Providers>
           <AdminBar
             adminBarProps={{
               preview: isEnabled,
