@@ -100,6 +100,7 @@ const config = {
               '--tw-prose-counters': 'rgb(var(--_gray-700))',
               '--tw-prose-invert-counters': 'rgb(var(--_gray-300))',
               '--tw-prose-headings': 'rgb(var(--_gray-900))',
+              '--tw-prose-invert-headings': 'rgb(var(--_white))',
               '--tw-prose-quotes': 'rgb(var(--_gray-700))',
               '--tw-prose-invert-quotes': 'rgb(var(--_gray-300))',
               '--tw-prose-quote-borders': 'rgb(var(--_gray-300))',
