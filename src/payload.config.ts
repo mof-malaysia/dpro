@@ -31,6 +31,13 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     user: Users.slug,
+    ...(process.env.APP_ENV === 'development' && {
+      autoLogin: {
+        email: 'dev@payloadcms.com',
+        password: 'abc123',
+        prefillOnly: true,
+      },
+    }),
     livePreview: {
       breakpoints: [
         {
@@ -104,7 +111,7 @@ export default buildConfig({
   },
   upload: {
     limits: {
-      fileSize: 4500000,
+      fileSize: 4500000, // max 4.5MB in Vercel
     },
   },
   jobs: {
