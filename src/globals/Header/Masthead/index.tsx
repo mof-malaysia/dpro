@@ -9,7 +9,6 @@ import {
   MastheadTitle,
   MastheadTrigger,
 } from '@govtechmy/myds-react/masthead'
-import { useTranslations } from 'next-intl'
 
 export function Masthead() {
   return (

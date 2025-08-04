@@ -11,11 +11,9 @@ import { Providers } from '@/providers'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { Inter, Poppins } from 'next/font/google'
 import { draftMode } from 'next/headers'
-import { notFound } from 'next/navigation'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
-import { getMessages } from 'next-intl/server'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
 const poppins = Poppins({
