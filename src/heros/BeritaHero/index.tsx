@@ -32,7 +32,7 @@ export const BeritaHero: React.FC<{
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="flex flex-col gap-3">
-          <h1 className="font-heading font-semibold text-heading-sm">{title}</h1>
+          <h1>{title}</h1>
           {publishedAt && (
             <div className="flex flex-col gap-1">
               <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>

@@ -34,7 +34,7 @@ export default async function Page() {
       </Hero>
       {/* <div className="container mb-8">
         <PageRange
-          collection="posts"
+          collection="berita"
           currentPage={berita.page}
           limit={12}
           totalDocs={berita.totalDocs}
