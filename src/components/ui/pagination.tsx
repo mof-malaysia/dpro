@@ -35,8 +35,7 @@ const PaginationLink = ({ className, isActive, size = 'sm', ...props }: Paginati
     className={cn(
       buttonVariants({
         size,
-        variant: isActive ? 'outline' : 'ghost',
-        iconOnly: true,
+        variant: 'default-outline',
       }),
       className,
     )}
