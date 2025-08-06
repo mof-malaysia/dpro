@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, CardNewsData } from '@/components/NewsCard'
+import { Card, CardNewsData } from '@/components/Card'
 import { Container, Section } from '../ui/container'
 
 export type Props = {
