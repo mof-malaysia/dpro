@@ -32,7 +32,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
   return (
     <figure
       className={cn(
-        'my-4 space-y-3 w-full lg:min-w-[740px] h-auto select-none',
+        'my-4 space-y-3 w-full lg:min-w-screen-sm h-auto select-none',
         {
           container: enableGutter,
         },

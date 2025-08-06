@@ -7,7 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@govtechmy/myds-react/breadcrumb'
-import { Container } from '@/components/ui/container'
+import { Container, Section } from '@/components/ui/container'
 
 export const Hero: React.FC<{
   children?: React.ReactNode
@@ -15,7 +15,7 @@ export const Hero: React.FC<{
 }> = ({ children, title }) => {
   return (
     <Container>
-      <div className="col-start-1 col-span-full lg:col-start-2 lg:col-span-10 space-y-6">
+      <Section className="grid grid-cols-subgrid gap-y-6 *:col-span-full">
         <Breadcrumb variant="default">
           <BreadcrumbItem>
             <BreadcrumbLink href="/">Utama</BreadcrumbLink>
@@ -25,10 +25,9 @@ export const Hero: React.FC<{
             <BreadcrumbPage>{title}</BreadcrumbPage>
           </BreadcrumbItem>
         </Breadcrumb>
-
-        <h1>{title}</h1>
+        <h1 className="col-span-full">{title}</h1>
         {children}
-      </div>
+      </Section>
     </Container>
   )
 }
