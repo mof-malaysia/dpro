@@ -7,7 +7,7 @@ export const Penerbitan: CollectionConfig = {
     singular: 'Penerbitan',
     plural: 'Penerbitan',
   },
-  defaultSort: 'doc_date',
+  defaultSort: 'publish_date',
   timestamps: true,
   versions: {
     drafts: true,
@@ -27,8 +27,8 @@ export const Penerbitan: CollectionConfig = {
       required: true,
     },
     {
-      name: 'upload_date',
-      label: 'Tarikh Muat Naik',
+      name: 'publish_date',
+      label: 'Tarikh Diterbit',
       type: 'date',
       required: true,
     },
