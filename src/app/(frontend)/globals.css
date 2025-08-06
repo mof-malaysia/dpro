@@ -7,76 +7,92 @@
 @import '@govtechmy/myds-style/light.css';
 @import '@govtechmy/myds-style/dark.css';
 
-@layer base {
-  * {
-    --_secondary-50: 244 239 255;
-    --_secondary-200: 212 192 255;
-    --_secondary-300: 183 148 255;
-    --_secondary-400: 183 148 255;
-    --_secondary-600: 112 47 249;
-    --_secondary-700: 91 26 230;
-    --_secondary-800: 91 26 230;
-    --_secondary-950: 32 22 54;
+* {
+  --_primary-50: 247 243 255;
+  --_primary-100: 229 217 255;
+  --_primary-200: 212 192 255;
+  --_primary-300: 183 148 255;
+  --_primary-400: 153 105 255;
+  --_primary-500: 133 76 255;
+  --_primary-600: 112 47 249;
+  --_primary-700: 91 26 230;
+  --_primary-800: 79 32 178;
+  --_primary-900: 50 36 83;
+  --_primary-950: 32 22 54;
+}
 
-    --bg-secondary-50: var(--_secondary-50);
-    --bg-secondary-100: var(--_secondary-100);
-    --bg-secondary-200: var(--_secondary-200);
-    --bg-secondary-300: var(--_secondary-300);
-    --bg-secondary-400: var(--_secondary-400);
-    --bg-secondary-500: var(--_secondary-500);
-    --bg-secondary-600: var(--_secondary-600);
-    --bg-secondary-700: var(--_secondary-700);
-    --bg-secondary-800: var(--_secondary-800);
-    --bg-secondary-900: var(--_secondary-900);
-    --bg-secondary-950: var(--_secondary-950);
-    --bg-secondary-disabled: var(--_secondary-200);
+@layer base {
+  :root {
+    --bg-primary-50: var(--_primary-50);
+    --bg-primary-100: var(--_primary-100);
+    --bg-primary-200: var(--_primary-200);
+    --bg-primary-300: var(--_primary-300);
+    --bg-primary-400: var(--_primary-400);
+    --bg-primary-500: var(--_primary-500);
+    --bg-primary-600: var(--_primary-600);
+    --bg-primary-700: var(--_primary-700);
+    --bg-primary-800: var(--_primary-800);
+    --bg-primary-900: var(--_primary-900);
+    --bg-primary-950: var(--_primary-950);
+    --bg-primary-disabled: var(--_primary-300) / 0.4;
+
+    --txt-primary: var(--_primary-600);
+    --txt-primary-disabled: var(--_primary-600) / 0.4;
+
+    --otl-primary-50: var(--_primary-50);
+    --otl-primary-200: var(--_primary-200);
+    --otl-primary-300: var(--_primary-300);
+    --otl-primary-600: var(--_primary-600);
+    --otl-primary-disabled: var(--_primary-200) / 0.4;
+
+    --fr-primary: var(--_primary-300) / 0.4;
+
+    --_secondary-300: 150 183 255;
+    --_secondary-400: 99 148 255;
+    --_secondary-600: 37 99 235;
 
     --txt-secondary: var(--_secondary-600);
-    --txt-secondary-disabled: var(--_secondary-600) / 0.4;
-
-    --otl-secondary-200: var(--_secondary-200);
-    --otl-secondary-300: var(--_secondary-300);
-    --otl-secondary-disabled: var(--_secondary-200) / 0.4;
-
-    --fr-secondary: var(--_secondary-300) / 0.4;
+    --fr-secondary: var(--secondary-300) / 0.4;
   }
 
   .dark {
-    --bg-secondary-50: var(--_secondary-950);
-    --bg-secondary-100: var(--_secondary-900);
-    --bg-secondary-200: var(--_secondary-800);
-    --bg-secondary-300: var(--_secondary-700);
-    --bg-secondary-400: var(--_secondary-600);
-    --bg-secondary-500: var(--_secondary-500);
-    --bg-secondary-600: var(--_secondary-400);
-    --bg-secondary-700: var(--_secondary-300);
-    --bg-secondary-800: var(--_secondary-200);
-    --bg-secondary-900: var(--_secondary-100);
-    --bg-secondary-950: var(--_secondary-50);
-    --bg-secondary-disabled: var(--_secondary-950);
+    --bg-primary-50: var(--_primary-950);
+    --bg-primary-100: var(--_primary-900);
+    --bg-primary-200: var(--_primary-800);
+    --bg-primary-300: var(--_primary-700);
+    --bg-primary-400: var(--_primary-600);
+    --bg-primary-500: var(--_primary-500);
+    --bg-primary-600: var(--_primary-400);
+    --bg-primary-700: var(--_primary-300);
+    --bg-primary-800: var(--_primary-200);
+    --bg-primary-900: var(--_primary-100);
+    --bg-primary-950: var(--_primary-50);
+    --bg-primary-disabled: var(--_primary-950);
+
+    --txt-primary: var(--_primary-400);
+    --txt-primary-disabled: var(--_primary-400) / 0.4;
+
+    --otl-primary-50: var(--_primary-950);
+    --otl-primary-200: var(--_primary-800);
+    --otl-primary-300: var(--_primary-700);
+    --otl-primary-600: var(--_primary-400);
+    --otl-primary-disabled: var(--_primary-800) / 0.4;
+
+    --fr-primary: var(--_primary-700) / 0.4;
 
     --txt-secondary: var(--_secondary-400);
-    --txt-secondary-disabled: var(--_secondary-400) / 0.4;
-
-    --otl-secondary-200: var(--_secondary-800);
-    --otl-secondary-300: var(--_secondary-700);
-    --otl-secondary-disabled: var(--_secondary-800) / 0.4;
-
-    --fr-secondary: var(--_secondary-700) / 0.4;
+    --fr-secondary: var(--secondary-300) / 0.4;
   }
 
   h1:not(.prose > h1) {
     @apply font-heading font-semibold text-heading-sm md:text-heading-md;
   }
-
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
+  h2:not(.prose > h2) {
+    @apply font-heading font-semibold text-heading-xs md:text-heading-sm;
   }
 
   * {
-    @apply border-otl-gray-200;
+    @apply border-otl-gray-200 ring-fr-primary;
   }
   body {
     @apply bg-bg-white text-txt-black-900 min-h-[100vh] flex flex-col;
