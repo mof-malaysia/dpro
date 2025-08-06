@@ -8,6 +8,7 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FAQBlock } from '@/blocks/FAQBlock/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { Container } from '@/components/ui/container'
 
 const blockComponents = {
   // archive: ArchiveBlock,
@@ -36,10 +37,10 @@ export const RenderBlocks: React.FC<{
 
             if (Block) {
               return (
-                <div className="container my-16" key={index}>
+                <Container className="py-[84px]" key={index}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} />
-                </div>
+                </Container>
               )
             }
           }
