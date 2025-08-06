@@ -7,10 +7,10 @@ import type { Header } from '@/payload-types'
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
 
-// import { Button, ButtonIcon } from '@govtechmy/myds-react/button'
+// import { Button } from '@govtechmy/myds-react/button'
 // import { SearchIcon } from '@govtechmy/myds-react/icon'
 import { Navbar, NavbarAction } from '@govtechmy/myds-react/navbar'
-import { ThemeSwitch } from '@govtechmy/myds-react/theme-switch'
+// import { ThemeSwitch } from '@govtechmy/myds-react/theme-switch'
 
 interface HeaderClientProps {
   data: Header
@@ -25,12 +25,10 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
       <HeaderNav data={data} />
       <NavbarAction>
         {/* <Button variant="default-ghost" iconOnly aria-label="search-button" size="small">
-          <ButtonIcon>
-            <SearchIcon />
-          </ButtonIcon>
+          <SearchIcon />
         </Button> */}
 
-        <ThemeSwitch />
+        {/* <ThemeSwitch /> */}
       </NavbarAction>
     </Navbar>
   )
