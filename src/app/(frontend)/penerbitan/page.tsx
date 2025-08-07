@@ -1,25 +1,23 @@
-import type { Metadata } from 'next/types'
-
-import { NewsArchive } from '@/components/NewsArchive'
-import { PageRange } from '@/components/PageRange'
+import { FileCard } from '@/components/FileCard'
 import { Pagination } from '@/components/Pagination'
+import { Hero } from '@/heros/Hero'
 import configPromise from '@payload-config'
+import type { Metadata } from 'next/types'
 import { getPayload } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
-import { Hero } from '@/heros/Hero'
 import { Container, Section } from '@/components/ui/container'
 
 export const dynamic = 'force-static'
-export const revalidate = 600
 
 export default async function Page() {
   const payload = await getPayload({ config: configPromise })
 
-  const berita = await payload.find({
-    collection: 'file',
+  const files = await payload.find({
+    collection: 'penerbitan',
     depth: 1,
     limit: 12,
+    sort: '-publish_date',
     // overrideAccess: false,
     // select: {
     //   title: true,
@@ -29,7 +27,7 @@ export default async function Page() {
   })
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="py-24 space-y-8">
       <Hero title="Penerbitan">
         <PageClient />
       </Hero>
@@ -43,20 +41,23 @@ export default async function Page() {
         />
       </div> */}
 
-      {/* <NewsArchive posts={berita.docs} /> */}
       <Container>
         <Section>
-          {berita.docs.map((doc) => (
-            <a key={doc.id} target="_blank" href={doc.url!}>
-              {doc.filename}
-            </a>
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+            {files.docs?.map((result, index) => {
+              if (typeof result === 'object' && result !== null) {
+                return <FileCard doc={result} key={index} />
+              }
+
+              return null
+            })}
+          </div>
         </Section>
       </Container>
 
       <div className="container">
-        {berita.totalPages > 1 && berita.page && (
-          <Pagination page={berita.page} totalPages={berita.totalPages} />
+        {files.totalPages > 1 && files.page && (
+          <Pagination page={files.page} totalPages={files.totalPages} />
         )}
       </div>
     </div>
@@ -65,6 +66,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Berita`,
+    title: `Penerbitan`,
   }
 }

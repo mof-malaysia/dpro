@@ -1,16 +1,15 @@
 'use client'
+import { Media } from '@/components/Media'
+import type { Berita } from '@/payload-types'
+import { formatDate } from '@/utilities/formatDateTime'
 import { cn } from '@/utilities/ui'
 import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
 import React from 'react'
 
-import type { Berita } from '@/payload-types'
+export type CardNewsData = Pick<Berita, 'slug' | 'meta' | 'title' | 'publishedAt'>
 
-import { Media } from '@/components/Media'
-
-export type CardNewsData = Pick<Berita, 'slug' | 'meta' | 'title'>
-
-export const Card: React.FC<{
+export const NewsCard: React.FC<{
   alignItems?: 'center'
   className?: string
   doc?: CardNewsData
@@ -20,33 +19,30 @@ export const Card: React.FC<{
   const { card, link } = useClickableCard({})
   const { className, doc, relationTo, title: titleFromProps } = props
 
-  const { slug, meta, title } = doc || {}
-  const { description, image: metaImage } = meta || {}
+  const { slug, meta, title, publishedAt } = doc || {}
+  const { image: metaImage } = meta || {}
 
   const titleToUse = titleFromProps || title
-  const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`
 
   return (
     <article
-      className={cn('border rounded-lg overflow-hidden hover:cursor-pointer', className)}
+      className={cn('group border rounded-lg overflow-hidden hover:cursor-pointer', className)}
       ref={card.ref}
     >
-      <div className="relative w-full ">
-        {!metaImage && <div className="">No image</div>}
+      <div className="relative w-full">
+        {!metaImage && <div className="h-[300px]" />}
         {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
       </div>
-      <div className="p-4.5 space-y-4.5">
+      <div className="relative p-4.5 space-y-4">
         {titleToUse && (
-          <div className="prose">
-            <h3>
-              <Link className="not-prose" href={href} ref={link.ref}>
-                {titleToUse}
-              </Link>
-            </h3>
-          </div>
+          <Link href={href} ref={link.ref}>
+            <div className="prose">
+              <h5 className="line-clamp-2">{titleToUse}</h5>
+            </div>
+          </Link>
         )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+        {publishedAt && <p>{formatDate(publishedAt)}</p>}
       </div>
     </article>
   )

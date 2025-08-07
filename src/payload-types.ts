@@ -678,7 +678,7 @@ export interface FAQBlock {
 export interface Penerbitan {
   id: string;
   name: string;
-  upload_date: string;
+  publish_date: string;
   file_upload: string | File;
   updatedAt: string;
   createdAt: string;
@@ -1218,7 +1218,7 @@ export interface FAQBlockSelect<T extends boolean = true> {
  */
 export interface PenerbitanSelect<T extends boolean = true> {
   name?: T;
-  upload_date?: T;
+  publish_date?: T;
   file_upload?: T;
   updatedAt?: T;
   createdAt?: T;

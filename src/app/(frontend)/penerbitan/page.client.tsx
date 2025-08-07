@@ -9,10 +9,10 @@ const PageClient: React.FC = () => {
 
   return (
     <>
-      <div className="col-start-1 col-span-full lg:col-start-2 lg:col-span-6">
+      <div className="lg:col-span-6">
         <SearchBar searchRef={searchRef} query={query} setQuery={setQuery} />
       </div>
-      <div className="col-start-1 col-span-full lg:col-start-2 lg:col-span-10 flex gap-3 items-center">
+      <div className="col-span-full flex gap-3 items-center">
         <Select size="small" variant="outline">
           <SelectTrigger>
             <SelectValue label="" placeholder="Semua" />

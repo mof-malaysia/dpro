@@ -64,7 +64,7 @@ export default async function Page() {
                     href: `https://www.waze.com/en/live-map/directions/menara-usahawan-persiaran-perdana-18-putrajaya?place=w.66650141.666435876.410674`,
                   },
                 ].map(({ name, href }) => (
-                  <Button key={name} variant="secondary-outline" asChild>
+                  <Button key={name} variant="outline" asChild>
                     <Link href={href} newTab underline="none">
                       <DirectionIcon />
                       {name}

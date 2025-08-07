@@ -5,7 +5,10 @@ const Container: React.FC<
   { ref?: React.Ref<HTMLDivElement> } & React.HTMLAttributes<HTMLDivElement>
 > = ({ className, ref, ...props }) => (
   <div
-    className={cn('container grid grid-cols-4 lg:grid-cols-12 px-4.5 lg:px-6', className)}
+    className={cn(
+      'container grid grid-cols-4 gap-6 lg:grid-cols-12 px-4.5 lg:px-6 xl:px-0',
+      className,
+    )}
     ref={ref}
     {...props}
   />

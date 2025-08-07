@@ -1,7 +1,6 @@
 import type { CollectionSlug, Payload, PayloadRequest, File } from 'payload'
 
 import { home } from './home'
-import { imageHero1 } from './image-hero-1'
 
 const collections: CollectionSlug[] = ['media', 'pages', 'forms', 'form-submissions', 'search']
 const globals = ['header', 'footer'] as const
@@ -58,7 +57,7 @@ export const seed = async ({
     depth: 0,
     where: {
       email: {
-        equals: 'demo-author@example.com',
+        equals: 'dev@dpro.gov.my',
       },
     },
   })
@@ -67,7 +66,7 @@ export const seed = async ({
 
   const [hero1Buffer] = await Promise.all([
     fetchFileByURL(
-      'https://raw.githubusercontent.com/mof-malaysia/dpro/refs/heads/main/public/d.Pro-hero-image.webp',
+      'https://raw.githubusercontent.com/mof-malaysia/dpro/refs/heads/main/public/hero-image.png',
     ),
   ])
 
@@ -76,13 +75,15 @@ export const seed = async ({
       collection: 'users',
       data: {
         name: 'Dev',
-        email: 'dev@dpro.mof.gov.my',
+        email: 'dev@dpro.gov.my',
         password: 'Passw0rd321',
       },
     }),
     payload.create({
       collection: 'media',
-      data: imageHero1,
+      data: {
+        alt: 'Hero image',
+      },
       file: hero1Buffer,
     }),
   ])
@@ -104,35 +105,35 @@ export const seed = async ({
         navItems: [
           {
             link: {
-              type: 'reference',
+              type: 'custom',
               label: 'Utama',
               url: '/',
             },
           },
           {
             link: {
-              type: 'reference',
+              type: 'custom',
               label: 'Tender',
               url: '/tender',
             },
           },
           {
             link: {
-              type: 'reference',
+              type: 'custom',
               label: 'Penerbitan',
               url: '/penerbitan',
             },
           },
           {
             link: {
-              type: 'reference',
+              type: 'custom',
               label: 'Berita',
               url: '/berita',
             },
           },
           {
             link: {
-              type: 'reference',
+              type: 'custom',
               label: 'Hubungi Kami',
               url: '/hubungi-kami',
             },

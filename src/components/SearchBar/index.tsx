@@ -31,28 +31,29 @@ export const SearchBar: React.FC<{
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === '/') {
-        event.preventDefault()
-        searchRef.current?.focus()
-      }
-      // Check if 'CMD + K' or 'Ctrl + K' key combination is pressed
-      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
-        event.preventDefault()
-        searchRef.current?.focus()
-      }
-      if (event.key === 'Escape') {
-        event.preventDefault()
-        searchRef.current?.blur()
-        handleClickOutside()
+      if (isInputFocused) {
+        if (event.key === 'Escape') {
+          event.preventDefault()
+          searchRef.current?.blur()
+          handleClickOutside()
+        }
+      } else {
+        if (event.key === '/') {
+          event.preventDefault()
+          searchRef.current?.focus()
+        }
+        // Check if 'CMD + K' or 'Ctrl + K' key combination is pressed
+        if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+          event.preventDefault()
+          searchRef.current?.focus()
+        }
       }
     }
-
     document.addEventListener('keydown', handleKeyDown)
-
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [])
+  }, [isInputFocused])
 
   const handleClickOutside = () => {
     setIsInputFocused(false)
@@ -65,17 +66,20 @@ export const SearchBar: React.FC<{
 
   return (
     <SearchBarRoot size="large">
-      <SearchBarInputContainer>
+      <SearchBarInputContainer className="min-w-full">
         <SearchBarInput
           ref={searchRef}
           value={query}
-          onValueChange={setQuery}
+          onValueChange={onSearch}
           onFocus={() => setIsInputFocused(true)}
         />
-        <SearchBarHint>
-          Press <Pill size="small">/</Pill> to search
+        <SearchBarHint
+          className="shrink-0 max-sm:hidden"
+          onClick={() => searchRef.current?.focus()}
+        >
+          Tekan <Pill size="small">/</Pill> untuk cari
         </SearchBarHint>
-        <SearchBarClearButton />
+        {query && <SearchBarClearButton onClick={() => onSearch('')} />}
         <SearchBarSearchButton />
       </SearchBarInputContainer>
     </SearchBarRoot>
