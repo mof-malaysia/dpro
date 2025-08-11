@@ -1,14 +1,16 @@
 import { CollectionArchive } from '@/components/CollectionArchive'
+import { CardFileData } from '@/components/FileCard'
+import { CardNewsData } from '@/components/NewsCard'
 import { Button } from '@/components/ui/button'
 import { Section } from '@/components/ui/container'
-import type { ArchiveBlock as ArchiveBlockProps, Berita, Penerbitan } from '@/payload-types'
+import type { ArchiveBlock as ArchiveBlockProps } from '@/payload-types'
 import { ArrowOutgoingIcon } from '@govtechmy/myds-react/icon'
 import configPromise from '@payload-config'
 import Link from 'next/link'
 import { getPayload } from 'payload'
 import React from 'react'
 
-type Post = Berita | Penerbitan
+type Post = CardFileData | CardNewsData
 
 export const ArchiveBlock: React.FC<
   ArchiveBlockProps & {

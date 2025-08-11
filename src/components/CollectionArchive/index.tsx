@@ -1,32 +1,33 @@
-import { cn } from '@/utilities/ui'
+import { CardFileData, FileCard } from '@/components/FileCard'
+import { CardNewsData, NewsCard } from '@/components/NewsCard'
 import React from 'react'
 
-import { Card, CardNewsData } from '@/components/Card'
-
 export type Props = {
-  posts: CardNewsData[]
+  posts: (CardNewsData | CardFileData)[]
 }
 
-export const CollectionArchive: React.FC<Props> = (props) => {
-  const { posts } = props
+function isBerita(post: CardNewsData | CardFileData): post is CardNewsData {
+  return (post as CardNewsData).slug !== undefined
+}
 
+function isPenerbitan(post: CardNewsData | CardFileData): post is CardFileData {
+  return (post as CardFileData).fileUpload !== undefined
+}
+
+export const CollectionArchive: React.FC<Props> = ({ posts }) => {
   return (
-    <div className={cn('container')}>
-      <div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-          {posts?.map((result, index) => {
-            if (typeof result === 'object' && result !== null) {
-              return (
-                <div className="col-span-4" key={index}>
-                  <Card className="h-full" doc={result} relationTo="berita" />
-                </div>
-              )
-            }
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+      {posts?.map((result, index) => {
+        if (typeof result === 'object' && result !== null) {
+          return isBerita(result) ? (
+            <NewsCard className="h-full" doc={result as CardNewsData} key={index} />
+          ) : isPenerbitan(result) ? (
+            <FileCard className="h-full" doc={result as CardFileData} key={index} />
+          ) : null
+        }
 
-            return null
-          })}
-        </div>
-      </div>
+        return null
+      })}
     </div>
   )
 }

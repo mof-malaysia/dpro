@@ -711,19 +711,6 @@ export interface FAQBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "penerbitan".
- */
-export interface Penerbitan {
-  id: string;
-  name: string;
-  publish_date: string;
-  file_upload: string | File;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -1270,8 +1257,8 @@ export interface FAQBlockSelect<T extends boolean = true> {
  */
 export interface PenerbitanSelect<T extends boolean = true> {
   name?: T;
-  publish_date?: T;
-  file_upload?: T;
+  publishedAt?: T;
+  fileUpload?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
