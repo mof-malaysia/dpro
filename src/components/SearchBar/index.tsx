@@ -9,13 +9,13 @@ import {
   SearchBar as SearchBarRoot,
   SearchBarSearchButton,
 } from '@govtechmy/myds-react/search-bar'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 
 export const SearchBar: React.FC<{
   onChange?: (query: string) => void
-}> = ({ onChange }) => {
-  const pathname = usePathname()
+  pathname: string
+}> = ({ onChange, pathname }) => {
   const searchRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -63,7 +63,7 @@ export const SearchBar: React.FC<{
   const handleSearch = () => {
     const newParams = new URLSearchParams(searchParams)
     newParams.set('q', query)
-    router.push(pathname + '/cari?' + newParams.toString())
+    router.push(pathname + '?' + newParams.toString())
   }
 
   return (

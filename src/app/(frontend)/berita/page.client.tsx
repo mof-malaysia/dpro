@@ -11,7 +11,7 @@ const PageClient: React.FC = () => {
   return (
     <>
       <div className="xl:col-span-6">
-        <SearchBar />
+        <SearchBar pathname={pathname + '/cari'} />
       </div>
 
       <DateRangePicker pathname={pathname + '/cari'} />
