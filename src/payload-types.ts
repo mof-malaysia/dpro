@@ -316,7 +316,7 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | FormBlock | FAQBlock)[];
+  layout: (ArchiveBlock | CallToActionBlock | ContentBlock | MediaBlock | FormBlock | FAQBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -328,6 +328,44 @@ export interface Page {
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchiveBlock".
+ */
+export interface ArchiveBlock {
+  title?: string | null;
+  populateBy?: ('collection' | 'selection') | null;
+  relationTo?: ('berita' | 'penerbitan') | null;
+  limit?: number | null;
+  selectedDocs?:
+    | (
+        | {
+            relationTo: 'berita';
+            value: string | Berita;
+          }
+        | {
+            relationTo: 'penerbitan';
+            value: string | Penerbitan;
+          }
+      )[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'archive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "penerbitan".
+ */
+export interface Penerbitan {
+  id: string;
+  name: string;
+  publishedAt: string;
+  fileUpload: string | File;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1106,6 +1144,7 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        archive?: T | ArchiveBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
@@ -1125,6 +1164,19 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchiveBlock_select".
+ */
+export interface ArchiveBlockSelect<T extends boolean = true> {
+  title?: T;
+  populateBy?: T;
+  relationTo?: T;
+  limit?: T;
+  selectedDocs?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
