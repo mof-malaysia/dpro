@@ -131,9 +131,39 @@ const Button: React.FC<ButtonProps> = ({
       ref={ref}
       className={cn(buttonVariants({ className, iconOnly, size, variant }))}
       data-size={size}
+      data-variant={variant}
       {...props}
     />
   )
 }
 
-export { Button, buttonVariants }
+interface ButtonCounterProps {
+  children: React.ReactNode
+  ref?: React.RefObject<HTMLSpanElement | null>
+}
+
+const ButtonCounter: React.ForwardRefExoticComponent<ButtonCounterProps> = React.forwardRef(
+  ({ children }, ref) => {
+    return (
+      <span
+        ref={ref}
+        className={cn(
+          'flex shrink-0 items-center justify-center',
+          'rounded-full bg-bg-primary-600 text-txt-white',
+          'group-disabled:bg-bg-white-disabled group-disabled:text-inherit',
+          '[[data-variant=primary-fill]_&]:bg-white [[data-variant=primary-fill]_&]:text-primary-600',
+          '[[data-variant=danger-fill]_&]:bg-white [[data-variant=danger-fill]_&]:text-danger-600',
+          '[[data-size=sm]_&]:size-4.5 [[data-size=sm]_&]:text-body-sm',
+          '[[data-size=md]_&]:size-5 [[data-size=md]_&]:text-body-sm',
+          '[[data-size=lg]_&]:size-6 [[data-size=lg]_&]:text-base',
+        )}
+      >
+        {children}
+      </span>
+    )
+  },
+)
+
+ButtonCounter.displayName = 'ButtonCounter'
+
+export { Button, ButtonCounter, buttonVariants }
