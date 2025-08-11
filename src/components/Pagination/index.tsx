@@ -1,101 +1,103 @@
 'use client'
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import {
-  Pagination as PaginationComponent,
+  Pagination as PaginationRoot,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
+  PaginationNumber,
   PaginationPrevious,
-} from '@/components/ui/pagination'
-import { cn } from '@/utilities/ui'
-import { useRouter } from 'next/navigation'
-import React from 'react'
+} from '@govtechmy/myds-react/pagination'
 
 export const Pagination: React.FC<{
-  className?: string
   page: number
+  limit: number
   totalPages: number
-}> = (props) => {
+}> = ({ page, limit, totalPages }) => {
   const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
-  const { className, page, totalPages } = props
-  const hasNextPage = page < totalPages
-  const hasPrevPage = page > 1
+  const range = (start: number, end: number) => {
+    const length = end - start + 1
+    return Array.from({ length }, (_, idx) => idx + start)
+  }
 
-  const hasExtraPrevPages = page - 1 > 1
-  const hasExtraNextPages = page + 1 < totalPages
+  const DOTS = '...'
+  const siblings = 1
+
+  const pageRange = () => {
+    if (totalPages <= 5 + siblings) {
+      return range(1, totalPages)
+    }
+
+    const leftSibIdx = Math.max(page - siblings, 1)
+    const rightSibIdx = Math.min(page + siblings, totalPages)
+
+    const showLeftDots = leftSibIdx > 2
+    const showRightDots = rightSibIdx < totalPages - 2
+
+    const firstPageIdx = 1
+    const lastPageIdx = totalPages
+
+    if (!showLeftDots && showRightDots) {
+      const leftItemCount = 3 + 2 * siblings
+      const leftRange = range(1, leftItemCount)
+      return [...leftRange, DOTS, totalPages]
+    }
+
+    if (showLeftDots && !showRightDots) {
+      const rightItemCount = 3 + 2 * siblings
+      const rightRange = range(totalPages - rightItemCount + 1, totalPages)
+      return [firstPageIdx, DOTS, ...rightRange]
+    }
+
+    if (showLeftDots && showRightDots) {
+      const middleRange = range(leftSibIdx, rightSibIdx)
+      return [firstPageIdx, DOTS, ...middleRange, DOTS, lastPageIdx]
+    }
+  }
+
+  const visiblePages = pageRange()
 
   return (
-    <div className={cn('my-12', className)}>
-      <PaginationComponent>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              disabled={!hasPrevPage}
-              onClick={() => {
-                router.push(`/berita/page/${page - 1}`)
-              }}
-            />
-          </PaginationItem>
-
-          {hasExtraPrevPages && (
-            <PaginationItem>
+    <PaginationRoot
+      page={page}
+      onPageChange={(page) => {
+        const newParams = new URLSearchParams(searchParams)
+        newParams.set('page', String(page))
+        router.push(pathname + '/cari?' + newParams.toString())
+      }}
+      count={totalPages}
+      limit={limit}
+      type="default"
+      className="sm:justify-end"
+    >
+      <PaginationContent className="gap-0 sm:gap-1">
+        <PaginationItem>
+          <PaginationPrevious
+            className="p-1.5 max-sm:size-9 sm:p-2 sm:mr-4"
+            disabled={page === 1}
+          />
+        </PaginationItem>
+        {visiblePages?.map((page) => (
+          <PaginationItem key={page} className="max-sm:*:size-9">
+            {page === '...' ? (
               <PaginationEllipsis />
-            </PaginationItem>
-          )}
-
-          {hasPrevPage && (
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => {
-                  router.push(`/berita/page/${page - 1}`)
-                }}
-              >
-                {page - 1}
-              </PaginationLink>
-            </PaginationItem>
-          )}
-
-          <PaginationItem>
-            <PaginationLink
-              isActive
-              onClick={() => {
-                router.push(`/berita/page/${page}`)
-              }}
-            >
-              {page}
-            </PaginationLink>
+            ) : (
+              typeof page === 'number' && <PaginationNumber number={page} />
+            )}
           </PaginationItem>
-
-          {hasNextPage && (
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => {
-                  router.push(`/berita/page/${page + 1}`)
-                }}
-              >
-                {page + 1}
-              </PaginationLink>
-            </PaginationItem>
-          )}
-
-          {hasExtraNextPages && (
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-          )}
-
-          <PaginationItem>
-            <PaginationNext
-              disabled={!hasNextPage}
-              onClick={() => {
-                router.push(`/berita/page/${page + 1}`)
-              }}
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </PaginationComponent>
-    </div>
+        ))}
+        <PaginationItem>
+          <PaginationNext
+            className="p-1.5 max-sm:size-9 sm:p-2 sm:ml-4"
+            disabled={page === totalPages}
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </PaginationRoot>
   )
 }

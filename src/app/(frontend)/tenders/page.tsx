@@ -44,11 +44,11 @@ export default async function Page() {
         /> */}
       </div>
 
-      <CollectionArchive posts={posts.docs} />
+      {/* <CollectionArchive posts={posts.docs} /> */}
 
       <div className="container">
         {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+          <Pagination page={posts.page} limit={posts.limit} totalPages={posts.totalPages} />
         )}
       </div>
     </div>

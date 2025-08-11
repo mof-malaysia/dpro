@@ -8,7 +8,7 @@ import { Section } from '@/components/ui/container'
 
 export const CallToActionBlock: React.FC<CTABlockProps> = ({ links, richText }) => {
   return (
-    <Section className="bg-bg-secondary-50 rounded border border-otl-secondary-300 p-6 lg:p-10 flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
+    <Section className="bg-bg-primary-50 rounded border border-otl-primary-300 p-6 lg:p-10 flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
       <div className="max-w-[48rem] flex items-center">
         {richText && <RichText data={richText} enableGutter={false} />}
       </div>

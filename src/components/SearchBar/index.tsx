@@ -1,33 +1,28 @@
 'use client'
-import React, { RefObject, useEffect, useState } from 'react'
 
 import { Pill } from '@govtechmy/myds-react/pill'
 import {
-  SearchBar as SearchBarRoot,
-  SearchBarInput,
-  SearchBarInputContainer,
-  SearchBarSearchButton,
-  SearchBarResults,
-  SearchBarResultsList,
-  SearchBarResultsItem,
   SearchBarClearButton,
   SearchBarHint,
+  SearchBarInput,
+  SearchBarInputContainer,
+  SearchBar as SearchBarRoot,
+  SearchBarSearchButton,
 } from '@govtechmy/myds-react/search-bar'
+import { useRouter, useSearchParams } from 'next/navigation'
+import React, { useEffect, useRef, useState } from 'react'
 
 export const SearchBar: React.FC<{
-  onChange?: (query: string) => void
-  query: string
-  searchRef: RefObject<HTMLInputElement | null>
-  setQuery: (query: string) => void
-}> = ({ onChange, query, searchRef, setQuery }) => {
+  pathname: string
+}> = ({ pathname }) => {
+  const searchRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const [query, setQuery] = useState<string>(searchParams.get('q') || '')
   const [isInputFocused, setIsInputFocused] = useState(false)
 
-  const onSearch = (query: string) => {
-    if (typeof query === 'string') {
-      setQuery(query)
-      if (onChange) onChange(query)
-    }
-  }
+  const handleValueChange = (query: string) => setQuery(query)
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -59,10 +54,12 @@ export const SearchBar: React.FC<{
     setIsInputFocused(false)
   }
 
-  //   useOnClickOutside<HTMLDivElement | HTMLInputElement>(
-  //     [listRef as RefObject<HTMLDivElement>, searchRef as RefObject<HTMLInputElement>],
-  //     handleClickOutside,
-  //   )
+  const handleSearch = () => {
+    const newParams = new URLSearchParams(searchParams)
+    if (query) newParams.set('q', query)
+    else newParams.delete('q')
+    router.push(pathname + '?' + newParams.toString())
+  }
 
   return (
     <SearchBarRoot size="large">
@@ -70,17 +67,22 @@ export const SearchBar: React.FC<{
         <SearchBarInput
           ref={searchRef}
           value={query}
-          onValueChange={onSearch}
+          onValueChange={handleValueChange}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') handleSearch()
+          }}
           onFocus={() => setIsInputFocused(true)}
         />
-        <SearchBarHint
-          className="shrink-0 max-sm:hidden"
-          onClick={() => searchRef.current?.focus()}
-        >
-          Tekan <Pill size="small">/</Pill> untuk cari
-        </SearchBarHint>
-        {query && <SearchBarClearButton onClick={() => onSearch('')} />}
-        <SearchBarSearchButton />
+        {!isInputFocused && !query && (
+          <SearchBarHint
+            className="shrink-0 max-sm:hidden"
+            onClick={() => searchRef.current?.focus()}
+          >
+            Tekan <Pill size="small">/</Pill> untuk cari
+          </SearchBarHint>
+        )}
+        {query && <SearchBarClearButton onClick={() => handleValueChange('')} />}
+        <SearchBarSearchButton onClick={handleSearch} />
       </SearchBarInputContainer>
     </SearchBarRoot>
   )

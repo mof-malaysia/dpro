@@ -9,34 +9,39 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@govtechmy/myds-react/breadcrumb'
-import { ClockIcon, CopyIcon } from '@govtechmy/myds-react/icon'
+import { ClockIcon, FacebookIcon, LinkedinIcon, TwitterXIcon } from '@govtechmy/myds-react/icon'
+import { Link } from '@govtechmy/myds-react/link'
 import React from 'react'
 import { formatDateTime } from 'src/utilities/formatDateTime'
-
-type Node = { type: string; text: string; children: Node[] }
+import { CopyDialog } from './Component.client'
 
 export const BeritaHero: React.FC<{
   berita: Berita
 }> = ({ berita }) => {
-  const { content, heroImage, publishedAt, title } = berita
+  const { content, heroImage, publishedAt, slug, title } = berita
 
-  function getReadTimeEstimateFromRtf(doc: Node[]) {
-    let fullText = ''
+  const readTimeEstimate = getReadTimeEstimate(content.root.children as any)
 
-    // Recursive function to traverse the document structure
-    function extractText(node: Node) {
-      if (node.type === 'text' && node.text) {
-        fullText += node.text
-      } else if (node.children) {
-        node.children.forEach(extractText)
-      }
-    }
+  const SITE_URL = process.env.NEXT_PUBLIC_SERVER_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL
+  const URL = `${SITE_URL}/berita/${slug}`
 
-    doc.forEach(extractText) // Start extraction from the root of the parsed document
-    return getReadTimeEstimate(fullText)
-  }
-
-  const readTimeEstimate = getReadTimeEstimateFromRtf(content.root.children as any)
+  const SHARE_OPTIONS = [
+    {
+      name: 'Facebook',
+      icon: <FacebookIcon />,
+      link: `https://www.facebook.com/sharer/sharer.php?u=${URL}&t=${title}`,
+    },
+    {
+      name: 'Twitter',
+      icon: <TwitterXIcon />,
+      link: `https://www.twitter.com/intent/tweet?text=${title}&url=${URL}&hashtags=dpro`,
+    },
+    {
+      name: 'Linkedin',
+      icon: <LinkedinIcon />,
+      link: `https://www.linkedin.com/sharing/share-offsite/?url=${URL}`,
+    },
+  ]
 
   return (
     <div className="flex flex-col gap-6 items-center mx-auto lg:max-w-screen-sm px-4.5 lg:px-6">
@@ -66,9 +71,16 @@ export const BeritaHero: React.FC<{
         </div>
 
         <div className="flex items-center gap-3 pb-4.5 border-b">
-          <Button variant="default-outline" size="sm" iconOnly>
-            <CopyIcon />
-          </Button>
+          <CopyDialog url={URL} />
+
+          {SHARE_OPTIONS.map(({ icon, link, name }) => (
+            <Button variant="default-outline" size="sm" iconOnly asChild key={name}>
+              <Link newTab href={link}>
+                {icon}
+                <span className="sr-only">Share to {name}</span>
+              </Link>
+            </Button>
+          ))}
         </div>
       </div>
 

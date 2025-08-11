@@ -1,18 +1,14 @@
 import type { Metadata } from 'next'
 
-import { PayloadRedirects } from '@/components/PayloadRedirects'
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
-import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
-import RichText from '@/components/RichText'
-
-import type { Berita } from '@/payload-types'
-
-import { BeritaHero } from '@/heros/BeritaHero'
-import { generateMeta } from '@/utilities/generateMeta'
-import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { PayloadRedirects } from '@/components/PayloadRedirects'
+import RichText from '@/components/RichText'
+import { BeritaHero } from '@/heros/BeritaHero/Component'
+import { generateMeta } from '@/utilities/generateMeta'
+import configPromise from '@payload-config'
+import { draftMode } from 'next/headers'
+import { getPayload } from 'payload'
+import { cache } from 'react'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -50,8 +46,6 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   return (
     <article className="py-12">
-      {/* <PageClient /> */}
-
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 

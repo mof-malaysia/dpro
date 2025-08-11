@@ -1,23 +1,22 @@
-import { FileCard } from '@/components/FileCard'
+import { CollectionArchive } from '@/components/CollectionArchive'
 import { Pagination } from '@/components/Pagination'
+import { Container, Section } from '@/components/ui/container'
 import { Hero } from '@/heros/Hero'
 import configPromise from '@payload-config'
 import type { Metadata } from 'next/types'
 import { getPayload } from 'payload'
-import React from 'react'
 import PageClient from './page.client'
-import { Container, Section } from '@/components/ui/container'
 
 export const dynamic = 'force-static'
 
 export default async function Page() {
   const payload = await getPayload({ config: configPromise })
 
-  const files = await payload.find({
+  const penerbitan = await payload.find({
     collection: 'penerbitan',
     depth: 1,
     limit: 12,
-    sort: '-publish_date',
+    sort: '-publishedAt',
     // overrideAccess: false,
     // select: {
     //   title: true,
@@ -25,6 +24,7 @@ export default async function Page() {
     //   meta: true,
     // },
   })
+  const { docs, limit, page, totalPages } = penerbitan
 
   return (
     <div className="py-24 space-y-8">
@@ -32,32 +32,15 @@ export default async function Page() {
         <PageClient />
       </Hero>
 
-      {/* <div className="container mb-8">
-        <PageRange
-          collection="posts"
-          currentPage={berita.page}
-          limit={12}
-          totalDocs={berita.totalDocs}
-        />
-      </div> */}
-
       <Container>
         <Section>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
-            {files.docs?.map((result, index) => {
-              if (typeof result === 'object' && result !== null) {
-                return <FileCard doc={result} key={index} />
-              }
-
-              return null
-            })}
-          </div>
+          <CollectionArchive posts={docs} />
         </Section>
       </Container>
 
       <div className="container">
-        {files.totalPages > 1 && files.page && (
-          <Pagination page={files.page} totalPages={files.totalPages} />
+        {totalPages > 1 && page && (
+          <Pagination limit={limit} page={page!} totalPages={totalPages} />
         )}
       </div>
     </div>

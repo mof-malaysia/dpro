@@ -7,13 +7,13 @@ export const Penerbitan: CollectionConfig = {
     singular: 'Penerbitan',
     plural: 'Penerbitan',
   },
-  defaultSort: 'publish_date',
+  defaultSort: 'publishedAt',
   timestamps: true,
   versions: {
     drafts: true,
   },
   admin: {
-    defaultColumns: ['name', 'date', '_status'],
+    defaultColumns: ['name', 'publishedAt', '_status'],
     listSearchableFields: ['name'],
   },
   hooks: {
@@ -27,13 +27,13 @@ export const Penerbitan: CollectionConfig = {
       required: true,
     },
     {
-      name: 'publish_date',
+      name: 'publishedAt',
       label: 'Tarikh Diterbit',
       type: 'date',
       required: true,
     },
     {
-      name: 'file_upload',
+      name: 'fileUpload',
       label: 'Fail',
       type: 'upload',
       relationTo: 'file',

@@ -25,12 +25,12 @@ export function Masthead() {
           title="Pautan portal rasmi berakhir dengan .gov.my"
         >
           Sekiranya anda melihat pautan selain
-          <b>.gov.my</b>, segera tutupkan halaman itu walaupun ia menyerupai portal rasmi!
+          <b> .gov.my</b>, segera tutupkan halaman itu walaupun ia menyerupai portal rasmi!
         </MastheadSection>
         <MastheadSection icon={<Lock2Icon />} title="Portal yang selamat menggunakan HTTPS">
           Periksa ikon loker (
-          <LockFillIcon className="inline-block" />) atau
-          <b>https://</b>
+          <LockFillIcon className="inline-block mb-0.5" />) atau
+          <b> https:// </b>
           di depan pautan. Sekiranya tiada, jangan kongsikan sebarang maklumat sensitif
         </MastheadSection>
       </MastheadContent>
