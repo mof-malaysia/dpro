@@ -13,9 +13,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 
 export const SearchBar: React.FC<{
-  onChange?: (query: string) => void
   pathname: string
-}> = ({ onChange, pathname }) => {
+}> = ({ pathname }) => {
   const searchRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -23,12 +22,7 @@ export const SearchBar: React.FC<{
   const [query, setQuery] = useState<string>(searchParams.get('q') || '')
   const [isInputFocused, setIsInputFocused] = useState(false)
 
-  const handleValueChange = (query: string) => {
-    if (typeof query === 'string') {
-      setQuery(query)
-      if (onChange) onChange(query)
-    }
-  }
+  const handleValueChange = (query: string) => setQuery(query)
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -62,7 +56,8 @@ export const SearchBar: React.FC<{
 
   const handleSearch = () => {
     const newParams = new URLSearchParams(searchParams)
-    newParams.set('q', query)
+    if (query) newParams.set('q', query)
+    else newParams.delete('q')
     router.push(pathname + '?' + newParams.toString())
   }
 

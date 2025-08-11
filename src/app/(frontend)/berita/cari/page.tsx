@@ -13,7 +13,7 @@ export default async function Page({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const payload = await getPayload({ config: configPromise })
-  const query = (await searchParams).query
+  const query = (await searchParams).q
   const page = (await searchParams).page || 1
   const from = (await searchParams).dari
   const to = (await searchParams).hingga
@@ -29,7 +29,7 @@ export default async function Page({
     sort: '-publishedAt',
     where: {
       ...(query && {
-        name: {
+        title: {
           contains: query,
         },
       }),
