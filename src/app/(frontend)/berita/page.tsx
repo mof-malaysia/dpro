@@ -42,6 +42,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Berita | d.Pro`,
+    title: `Berita`,
   }
 }

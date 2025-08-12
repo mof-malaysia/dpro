@@ -69,6 +69,6 @@ export default async function Page({
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Hasil Carian Penerbitan | d.Pro`,
+    title: `Hasil Carian Penerbitan`,
   }
 }

@@ -116,6 +116,6 @@ const InfoLink = ({
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Hubungi Kami | d.Pro`,
+    title: `Hubungi Kami`,
   }
 }
