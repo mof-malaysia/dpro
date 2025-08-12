@@ -48,7 +48,7 @@ export const HomeHero: React.FC<Page['hero']> = ({ links, media, richText, title
       </div>
       <div className="h-auto select-none">
         {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
+          <Media fill imgClassName="-z-10 object-cover" priority loading="eager" resource={media} />
         )}
       </div>
     </div>
