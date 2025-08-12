@@ -50,6 +50,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 }
 
 export const metadata: Metadata = {
+  title: {
+    template: '%s | d.Pro',
+    default: 'd.Pro',
+  },
   metadataBase: new URL(getServerSideURL()),
   openGraph: mergeOpenGraph(),
   twitter: {

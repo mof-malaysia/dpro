@@ -14,7 +14,7 @@ export const Hero: React.FC<{
   title: string
 }> = ({ children, title }) => {
   return (
-    <Container>
+    <Container className="pt-8 pb-6 lg:pt-16 lg:pb-8">
       <Section className="grid grid-cols-subgrid gap-y-6 *:col-span-full">
         <Breadcrumb variant="default">
           <BreadcrumbItem>

@@ -51,6 +51,13 @@ const socialMediaOptions = social_media.map((key) => ({
   value: key,
 }))
 
+const map = ['Google Maps', 'Waze'] as const
+
+const mapOptions = map.map((key) => ({
+  label: key,
+  value: key,
+}))
+
 export const ContactInfo: GlobalConfig = {
   slug: 'contact-info',
   access: {
@@ -136,6 +143,38 @@ export const ContactInfo: GlobalConfig = {
         },
       ],
       maxRows: 6,
+    },
+    {
+      name: 'directions',
+      type: 'array',
+      label: 'Navigasi',
+      required: true,
+      fields: [
+        {
+          name: 'site',
+          label: 'Aplikasi Peta',
+          type: 'select',
+          required: true,
+          options: mapOptions,
+        },
+        {
+          name: 'url',
+          type: 'text',
+          label: 'URL Penuh',
+          required: true,
+        },
+      ],
+      defaultValue: [
+        {
+          site: 'Google Maps',
+          url: 'https://www.google.com/maps/dir//KEMENTERIAN+KEWANGAN,+Persiaran+Perdana,+Presint+2,+Putrajaya/@2.9260909,101.6477507,13z/',
+        },
+        {
+          site: 'Waze',
+          url: 'https://www.waze.com/live-map/directions/my/wilayah-persekutuan-putrajaya/putrajaya/kementerian-kewangan?to=place.ChIJfdFj5jm2zTERafbuqV-J0Zs',
+        },
+      ],
+      maxRows: 2,
     },
     {
       name: 'embed_query',

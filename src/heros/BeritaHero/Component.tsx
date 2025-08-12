@@ -84,7 +84,7 @@ export const BeritaHero: React.FC<{
         </div>
       </div>
 
-      <div className="w-full lg:min-w-[740px] h-auto select-none">
+      <div className="w-full lg:max-w-[740px] h-auto select-none">
         {heroImage && typeof heroImage !== 'string' && (
           <Media
             priority

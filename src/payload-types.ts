@@ -1548,6 +1548,11 @@ export interface ContactInfo {
     url: string;
     id?: string | null;
   }[];
+  directions: {
+    site: 'Google Maps' | 'Waze';
+    url: string;
+    id?: string | null;
+  }[];
   /**
    * Fill in the query (Place ID/place name/lat,lng) for Google Maps Embed
    */
@@ -1623,6 +1628,13 @@ export interface ContactInfoSelect<T extends boolean = true> {
   no_tel?: T;
   email?: T;
   pautan?:
+    | T
+    | {
+        site?: T;
+        url?: T;
+        id?: T;
+      };
+  directions?:
     | T
     | {
         site?: T;

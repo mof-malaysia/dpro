@@ -1,5 +1,4 @@
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
-import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
@@ -14,7 +13,7 @@ import { Page, Berita } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
 const generateTitle: GenerateTitle<Berita | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | d.Pro` : 'd.Pro'
+  return doc?.title ? `${doc.title}` : 'd.Pro'
 }
 
 const generateURL: GenerateURL<Berita | Page> = ({ doc }) => {
