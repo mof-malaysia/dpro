@@ -65,7 +65,7 @@ export default async function Page() {
 
               <div className="hidden sm:flex flex-col gap-3">
                 {info.map((info) => (
-                  <InfoLink {...info} />
+                  <InfoLink {...info} key={info.type} />
                 ))}
               </div>
             </div>
@@ -81,7 +81,7 @@ export default async function Page() {
 
               <div className="flex flex-col gap-3 sm:hidden max-sm:pt-8">
                 {info.map((info) => (
-                  <InfoLink {...info} />
+                  <InfoLink {...info} key={info.type} />
                 ))}
               </div>
             </div>
@@ -102,7 +102,6 @@ const InfoLink = ({
   type: 'email' | 'phone'
 }) => (
   <a
-    key={type}
     href={`${type === 'email' ? 'mailto' : 'tel'}:${info}`}
     className="group flex gap-2 items-center text-txt-primary"
   >
