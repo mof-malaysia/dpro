@@ -49,6 +49,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Penerbitan`,
+    title: `Penerbitan | d.Pro`,
   }
 }
