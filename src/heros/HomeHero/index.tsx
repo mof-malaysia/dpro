@@ -14,7 +14,7 @@ export const HomeHero: React.FC<Page['hero']> = ({ links, media, richText, title
   return (
     <div className="relative flex items-center justify-center text-white">
       <div className="mx-auto max-w-screen-xl grid grid-cols-4 lg:grid-cols-12 z-10 px-4.5 lg:px-6 xl:px-0 py-[120px]">
-        <div className="md:col-span-5 flex flex-col gap-8">
+        <div className="col-span-full md:col-span-5 flex flex-col gap-8">
           <div className="flex flex-col gap-4 md:gap-6">
             <div className="flex gap-4 md:gap-8">
               <span className="shrink-0 size-[76px] md:size-[88px] bg-white rounded-full flex justify-center items-center">

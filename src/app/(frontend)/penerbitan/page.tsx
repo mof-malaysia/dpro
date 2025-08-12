@@ -27,7 +27,7 @@ export default async function Page() {
   const { docs, limit, page, totalPages } = penerbitan
 
   return (
-    <div className="py-24 space-y-8">
+    <div className="pb-12 lg:pb-[84px]">
       <Hero title="Penerbitan">
         <PageClient />
       </Hero>
