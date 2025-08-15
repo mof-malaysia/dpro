@@ -14,7 +14,9 @@ export const FAQBlock: React.FC<FAQBlockProps> = (props) => {
 
   return (
     <Section className="space-y-6">
-      {title && <h2>{title}</h2>}
+      {title && (
+        <h2 className="font-heading font-semibold text-heading-xs md:text-heading-sm">{title}</h2>
+      )}
       <Accordion type="single">
         {columns &&
           columns.length > 0 &&

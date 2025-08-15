@@ -48,7 +48,9 @@ export const ArchiveBlock: React.FC<
 
   return (
     <Section className="space-y-12" id={`block-${id}`}>
-      {title && <h2>{title}</h2>}
+      {title && (
+        <h2 className="font-heading font-semibold text-heading-xs md:text-heading-sm">{title}</h2>
+      )}
 
       <CollectionArchive posts={posts} />
 

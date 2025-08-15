@@ -84,13 +84,6 @@
     --fr-secondary: var(--secondary-300) / 0.4;
   }
 
-  h1:not(.prose > h1) {
-    @apply font-heading font-semibold text-heading-sm md:text-heading-md;
-  }
-  h2:not(.prose > h2) {
-    @apply font-heading font-semibold text-heading-xs md:text-heading-sm;
-  }
-
   * {
     @apply border-otl-gray-200 ring-fr-primary;
   }

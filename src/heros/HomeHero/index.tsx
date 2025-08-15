@@ -20,7 +20,9 @@ export const HomeHero: React.FC<Page['hero']> = ({ links, media, richText, title
               <span className="shrink-0 size-[76px] md:size-[88px] bg-white rounded-full flex justify-center items-center">
                 <LogoDPro className="size-[50px]" />
               </span>
-              <h1 className="text-white">{title}</h1>
+              <h1 className="font-heading font-semibold text-heading-sm md:text-heading-md text-white">
+                {title}
+              </h1>
             </div>
             {richText && (
               <RichText className="[&_*]:text-white" data={richText} enableGutter={false} />
