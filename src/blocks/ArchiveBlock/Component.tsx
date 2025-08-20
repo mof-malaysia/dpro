@@ -46,12 +46,12 @@ export const ArchiveBlock: React.FC<
   }
 
   return (
-    <Section className="space-y-12" id={`block-${id}`}>
+    <Section className="space-y-6 lg:space-y-12" id={`block-${id}`}>
       <div className="flex justify-between items-center">
         {title && (
           <h2 className="font-heading font-semibold text-heading-xs md:text-heading-sm">{title}</h2>
         )}
-        <Button asChild variant="default-outline">
+        <Button asChild variant="default-outline" className="max-lg:hidden">
           <Link href={`/${relationTo}`}>
             Lihat Semua
             <ArrowOutgoingIcon className="text-txt-black-700" />
@@ -95,6 +95,13 @@ export const ArchiveBlock: React.FC<
           })}
         </div>
       )}
+
+      <Button asChild variant="default-outline" className="lg:hidden">
+        <Link href={`/${relationTo}`}>
+          Lihat Semua
+          <ArrowOutgoingIcon className="text-txt-black-700" />
+        </Link>
+      </Button>
     </Section>
   )
 }
