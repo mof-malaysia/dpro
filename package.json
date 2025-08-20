@@ -35,7 +35,6 @@
     "@payloadcms/plugin-form-builder": "3.49.1",
     "@payloadcms/plugin-nested-docs": "3.49.1",
     "@payloadcms/plugin-redirects": "3.49.1",
-    "@payloadcms/plugin-search": "3.49.1",
     "@payloadcms/plugin-seo": "3.49.1",
     "@payloadcms/richtext-lexical": "3.49.1",
     "@payloadcms/ui": "3.49.1",

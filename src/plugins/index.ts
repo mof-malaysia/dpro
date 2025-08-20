@@ -1,15 +1,12 @@
+import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
-import { searchPlugin } from '@payloadcms/plugin-search'
-import { Plugin } from 'payload'
-import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
-import { searchFields } from '@/search/fieldOverrides'
-import { beforeSyncWithSearch } from '@/search/beforeSync'
+import { Plugin } from 'payload'
 
-import { Page, Berita } from '@/payload-types'
+import { Berita, Page } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
 const generateTitle: GenerateTitle<Berita | Page> = ({ doc }) => {
@@ -76,15 +73,6 @@ export const plugins: Plugin[] = [
           }
           return field
         })
-      },
-    },
-  }),
-  searchPlugin({
-    collections: ['berita'],
-    beforeSync: beforeSyncWithSearch,
-    searchOverrides: {
-      fields: ({ defaultFields }) => {
-        return [...defaultFields, ...searchFields]
       },
     },
   }),
