@@ -1,6 +1,5 @@
-import { CollectionArchive } from '@/components/CollectionArchive'
-import { CardFileData } from '@/components/FileCard'
-import { CardNewsData } from '@/components/NewsCard'
+import { CardFileData, FileCard } from '@/components/FileCard'
+import { CardNewsData, NewsCard } from '@/components/NewsCard'
 import { Button } from '@/components/ui/button'
 import { Section } from '@/components/ui/container'
 import type { ArchiveBlock as ArchiveBlockProps } from '@/payload-types'
@@ -48,18 +47,53 @@ export const ArchiveBlock: React.FC<
 
   return (
     <Section className="space-y-12" id={`block-${id}`}>
-      {title && (
-        <h2 className="font-heading font-semibold text-heading-xs md:text-heading-sm">{title}</h2>
+      <div className="flex justify-between items-center">
+        {title && (
+          <h2 className="font-heading font-semibold text-heading-xs md:text-heading-sm">{title}</h2>
+        )}
+        <Button asChild variant="default-outline">
+          <Link href={`/${relationTo}`}>
+            Lihat Semua
+            <ArrowOutgoingIcon className="text-txt-black-700" />
+          </Link>
+        </Button>
+      </div>
+
+      {relationTo === 'berita' && (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+          {posts?.map((result, index) => {
+            if (typeof result === 'object' && result !== null) {
+              return (
+                <NewsCard
+                  className="max-md:hidden max-md:first:block"
+                  doc={result as CardNewsData}
+                  key={index}
+                />
+              )
+            }
+
+            return null
+          })}
+        </div>
       )}
 
-      <CollectionArchive posts={posts} />
+      {relationTo === 'penerbitan' && (
+        <div className="grid grid-cols-1 lg:grid-flow-col lg:grid-rows-2 gap-4 sm:gap-6">
+          {posts?.map((result, index) => {
+            if (typeof result === 'object' && result !== null) {
+              return (
+                <FileCard
+                  className="max-md:hidden max-md:first:block md:first:row-span-full"
+                  doc={result as CardFileData}
+                  key={index}
+                />
+              )
+            }
 
-      <Button asChild variant="default-outline" className="capitalize">
-        <Link href={`/${relationTo}`}>
-          Semua {relationTo}
-          <ArrowOutgoingIcon className="text-txt-black-700" />
-        </Link>
-      </Button>
+            return null
+          })}
+        </div>
+      )}
     </Section>
   )
 }
