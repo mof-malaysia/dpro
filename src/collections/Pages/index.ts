@@ -59,11 +59,27 @@ export const Pages: CollectionConfig<'pages'> = {
     useAsTitle: 'title',
   },
   fields: [
-    {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
+    OverviewField({
+      titlePath: 'title',
+      descriptionPath: 'description',
+      imagePath: 'image',
+    }),
+    MetaTitleField({
+      hasGenerateFn: true,
+    }),
+    MetaImageField({
+      relationTo: 'media',
+    }),
+
+    MetaDescriptionField({}),
+    PreviewField({
+      // if the `generateUrl` function is configured
+      hasGenerateFn: true,
+
+      // field paths to match the target field for data
+      titlePath: 'title',
+      descriptionPath: 'description',
+    }),
     {
       type: 'tabs',
       tabs: [
@@ -84,33 +100,6 @@ export const Pages: CollectionConfig<'pages'> = {
             },
           ],
           label: 'Content',
-        },
-        {
-          name: 'meta',
-          label: 'SEO',
-          fields: [
-            OverviewField({
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-              imagePath: 'meta.image',
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'media',
-            }),
-
-            MetaDescriptionField({}),
-            PreviewField({
-              // if the `generateUrl` function is configured
-              hasGenerateFn: true,
-
-              // field paths to match the target field for data
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-            }),
-          ],
         },
       ],
     },

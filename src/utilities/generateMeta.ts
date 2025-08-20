@@ -24,14 +24,14 @@ export const generateMeta = async (args: {
 }): Promise<Metadata> => {
   const { doc } = args
 
-  const ogImage = getImageURL(doc?.meta?.image)
+  const ogImage = getImageURL(doc?.image)
 
-  const title = doc?.meta?.title ? doc?.meta?.title : 'd.Pro'
+  const title = doc?.title ? doc?.title : 'd.Pro'
 
   return {
-    description: doc?.meta?.description,
+    description: doc?.description,
     openGraph: mergeOpenGraph({
-      description: doc?.meta?.description || '',
+      description: doc?.description || '',
       images: ogImage
         ? [
             {
