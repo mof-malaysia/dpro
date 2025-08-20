@@ -78,12 +78,13 @@ export const ArchiveBlock: React.FC<
       )}
 
       {relationTo === 'penerbitan' && (
-        <div className="grid grid-cols-1 lg:grid-flow-col lg:grid-rows-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {posts?.map((result, index) => {
             if (typeof result === 'object' && result !== null) {
               return (
                 <FileCard
-                  className="max-md:hidden max-md:first:block md:first:row-span-full"
+                  className="md:first:row-span-2"
+                  orientation={index !== 0 ? 'horizontal' : 'vertical'}
                   doc={result as CardFileData}
                   key={index}
                 />

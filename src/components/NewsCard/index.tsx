@@ -39,12 +39,16 @@ export const NewsCard: React.FC<{
       )}
       ref={card.ref}
     >
-      <div className="relative w-full grow ">
+      <div className="relative w-full">
         {heroImage && typeof heroImage !== 'string' && (
-          <Media htmlElement={null} resource={heroImage} imgClassName="object-cover h-[200px]" />
+          <Media
+            htmlElement={null}
+            resource={heroImage}
+            imgClassName="object-cover size-full max-h-[200px]"
+          />
         )}
       </div>
-      <div className="p-4.5 space-y-3">
+      <div className="grow p-4.5 space-y-3">
         <Tag size="small" variant="primary">
           {type}
         </Tag>
@@ -57,7 +61,7 @@ export const NewsCard: React.FC<{
             {titleToUse}
           </Link>
         )}
-        {description && <p className="text-sm text-txt-black-500 line-clamp-2">{description}</p>}
+        {description && <p className="text-sm text-txt-black-500 line-clamp-3">{description}</p>}
       </div>
       <div className="relative p-4.5 pt-3">
         {publishedAt && <p className="text-sm text-txt-black-500">{formatDate(publishedAt)}</p>}

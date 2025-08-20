@@ -32,12 +32,12 @@ import React from 'react'
 export type CardFileData = Pick<Penerbitan, 'description' | 'image' | 'name' | 'fileUpload'>
 
 export const FileCard: React.FC<{
-  alignItems?: 'center'
+  orientation?: 'horizontal' | 'vertical'
   className?: string
   doc?: CardFileData
   title?: string
 }> = (props) => {
-  const { className, doc } = props
+  const { className, doc, orientation = 'vertical' } = props
   const { description, image, name, fileUpload } = doc || {}
 
   const isMobile = useIsMobile()
@@ -53,23 +53,25 @@ export const FileCard: React.FC<{
               className,
             )}
           >
-            <div className="relative w-full grow space-y-4">
-              {image && typeof image !== 'string' && (
-                <Media
-                  htmlElement={null}
-                  resource={image}
-                  imgClassName="border rounded-md object-cover h-[200px]"
-                />
+            {image && typeof image !== 'string' ? (
+              <Media
+                htmlElement={null}
+                resource={image}
+                imgClassName="border rounded-md object-cover w-full h-[200px]"
+              />
+            ) : (
+              <div className="border rounded-md w-full h-[200px]" />
+            )}
+
+            <div className="grow space-y-3">
+              {name && (
+                <p className="font-semibold line-clamp-2 group-hover:text-txt-primary">{name}</p>
               )}
-              <div className="space-y-3">
-                {name && (
-                  <p className="font-semibold line-clamp-2 group-hover:text-txt-primary">{name}</p>
-                )}
-                {description && (
-                  <p className="text-sm text-txt-black-500 line-clamp-2">{description}</p>
-                )}
-              </div>
+              {description && (
+                <p className="text-sm text-txt-black-500 line-clamp-2">{description}</p>
+              )}
             </div>
+
             <Button
               variant="primary-outline"
               className="group-hover:bg-bg-primary-600 group-hover:border group-hover:border-otl-primary-600 group-hover:text-white"
@@ -120,19 +122,31 @@ export const FileCard: React.FC<{
       <DialogTrigger asChild>
         <article
           className={cn(
-            'group flex flex-col gap-6 p-4.5 border rounded-lg overflow-hidden',
+            orientation === 'vertical' ? 'lg:flex-col' : 'lg:flex-row',
+            'group flex flex-col gap-4 p-4.5 border rounded-lg overflow-hidden',
             'hover:cursor-pointer hover:border-otl-primary-300 hover:ring ring-fr-primary',
             className,
           )}
         >
-          <div className="relative w-full grow space-y-4">
-            {image && typeof image !== 'string' && (
-              <Media
-                htmlElement={null}
-                resource={image}
-                imgClassName="border rounded-md object-cover h-[200px]"
-              />
-            )}
+          {image && typeof image !== 'string' ? (
+            <Media
+              htmlElement={null}
+              resource={image}
+              imgClassName={cn(
+                'border rounded-md object-cover',
+                orientation === 'vertical' ? 'h-[200px]' : 'shrink-0 w-[180px] h-[150px]',
+              )}
+            />
+          ) : (
+            <div
+              className={cn(
+                'border rounded-md',
+                orientation === 'vertical' ? 'h-[200px]' : 'shrink-0 w-[180px] h-[150px]',
+              )}
+            />
+          )}
+
+          <div className="grow flex flex-col gap-3 justify-between">
             <div className="space-y-3">
               {name && (
                 <p className="font-semibold line-clamp-2 group-hover:text-txt-primary">{name}</p>
@@ -141,14 +155,14 @@ export const FileCard: React.FC<{
                 <p className="text-sm text-txt-black-500 line-clamp-2">{description}</p>
               )}
             </div>
+            <Button
+              variant="primary-outline"
+              className="group-hover:bg-bg-primary-600 group-hover:border group-hover:border-otl-primary-600 group-hover:text-white"
+            >
+              Info Lanjut
+              <ArrowOutgoingIcon />
+            </Button>
           </div>
-          <Button
-            variant="primary-outline"
-            className="group-hover:bg-bg-primary-600 group-hover:border group-hover:border-otl-primary-600 group-hover:text-white"
-          >
-            Info Lanjut
-            <ArrowOutgoingIcon />
-          </Button>
         </article>
       </DialogTrigger>
       <DialogBody className="lg:min-w-[800px]">
