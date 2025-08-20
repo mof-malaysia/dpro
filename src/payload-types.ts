@@ -151,8 +151,13 @@ export interface UserAuthOperations {
  */
 export interface Berita {
   id: string;
-  title: string;
-  heroImage?: (string | null) | Media;
+  title?: string | null;
+  /**
+   * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+   */
+  image?: (string | null) | Media;
+  description?: string | null;
+  type: 'Artikel' | 'Berita' | 'Pengumuman';
   content: {
     root: {
       type: string;
@@ -167,14 +172,6 @@ export interface Berita {
       version: number;
     };
     [k: string]: unknown;
-  };
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
   };
   slug?: string | null;
   slugLock?: boolean | null;
@@ -274,7 +271,7 @@ export interface Page {
   title: string;
   hero: {
     type: 'none' | 'home' | 'default';
-    title: string;
+    title?: string | null;
     richText?: {
       root: {
         type: string;
@@ -309,12 +306,57 @@ export interface Page {
             /**
              * Choose how the link should be rendered.
              */
-            appearance?: ('default' | 'outline') | null;
+            appearance?: ('primary-fill' | 'default-outline') | null;
           };
           id?: string | null;
         }[]
       | null;
-    media?: (string | null) | Media;
+    sliderImage?:
+      | {
+          media: string | Media;
+          title: string;
+          richText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'berita';
+                        value: string | Berita;
+                      } | null)
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                  /**
+                   * Choose how the link should be rendered.
+                   */
+                  appearance?: ('primary-fill' | 'default-outline') | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
   };
   layout: (ArchiveBlock | CallToActionBlock | ContentBlock | MediaBlock | FormBlock | FAQBlock)[];
   meta?: {
@@ -363,7 +405,9 @@ export interface ArchiveBlock {
  */
 export interface Penerbitan {
   id: string;
+  image: string | Media;
   name: string;
+  description: string;
   publishedAt: string;
   fileUpload: string | File;
   updatedAt: string;
@@ -409,7 +453,7 @@ export interface CallToActionBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('primary-fill' | 'primary-outline' | 'default-outline') | null;
         };
         id?: string | null;
       }[]
@@ -459,7 +503,7 @@ export interface ContentBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('primary-fill' | 'default-outline') | null;
         };
         id?: string | null;
       }[]
@@ -684,27 +728,88 @@ export interface Form {
  */
 export interface FAQBlock {
   title?: string | null;
-  columns?:
-    | {
-        title?: string | null;
-        richText?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
+  desc?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  helpdesk?: {
+    image?: (string | null) | Media;
+    title?: string | null;
+    desc?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
           [k: string]: unknown;
-        } | null;
-        id?: string | null;
-      }[]
-    | null;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'berita';
+                  value: string | Berita;
+                } | null)
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('primary-fill' | 'primary-outline' | 'default-outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  faq?: {
+    title?: string | null;
+    columns?:
+      | {
+          title?: string | null;
+          richText?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'faqBlock';
@@ -991,15 +1096,10 @@ export interface PayloadMigration {
  */
 export interface BeritaSelect<T extends boolean = true> {
   title?: T;
-  heroImage?: T;
+  image?: T;
+  description?: T;
+  type?: T;
   content?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
   slug?: T;
   slugLock?: T;
   publishedAt?: T;
@@ -1126,7 +1226,29 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               id?: T;
             };
-        media?: T;
+        sliderImage?:
+          | T
+          | {
+              media?: T;
+              title?: T;
+              richText?: T;
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+            };
       };
   layout?:
     | T
@@ -1241,12 +1363,40 @@ export interface FormBlockSelect<T extends boolean = true> {
  */
 export interface FAQBlockSelect<T extends boolean = true> {
   title?: T;
-  columns?:
+  desc?: T;
+  helpdesk?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        desc?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+      };
+  faq?:
     | T
     | {
         title?: T;
-        richText?: T;
-        id?: T;
+        columns?:
+          | T
+          | {
+              title?: T;
+              richText?: T;
+              id?: T;
+            };
       };
   id?: T;
   blockName?: T;
@@ -1256,7 +1406,9 @@ export interface FAQBlockSelect<T extends boolean = true> {
  * via the `definition` "penerbitan_select".
  */
 export interface PenerbitanSelect<T extends boolean = true> {
+  image?: T;
   name?: T;
+  description?: T;
   publishedAt?: T;
   fileUpload?: T;
   updatedAt?: T;
