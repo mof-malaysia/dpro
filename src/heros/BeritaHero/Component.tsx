@@ -18,7 +18,7 @@ import { CopyDialog } from './Component.client'
 export const BeritaHero: React.FC<{
   berita: Berita
 }> = ({ berita }) => {
-  const { content, heroImage, publishedAt, slug, title } = berita
+  const { content, image, publishedAt, slug, title } = berita
 
   const readTimeEstimate = getReadTimeEstimate(content.root.children as any)
 
@@ -85,13 +85,8 @@ export const BeritaHero: React.FC<{
       </div>
 
       <div className="w-full lg:max-w-[740px] h-auto select-none">
-        {heroImage && typeof heroImage !== 'string' && (
-          <Media
-            priority
-            loading="eager"
-            imgClassName="object-cover rounded-md"
-            resource={heroImage}
-          />
+        {image && typeof image !== 'string' && (
+          <Media priority loading="eager" imgClassName="object-cover rounded-md" resource={image} />
         )}
       </div>
     </div>
