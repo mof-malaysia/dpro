@@ -149,13 +149,9 @@ export interface UserAuthOperations {
  */
 export interface Berita {
   id: string;
-  title?: string | null;
-  /**
-   * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-   */
-  image?: (string | null) | Media;
-  description?: string | null;
+  title: string;
   type: 'Artikel' | 'Berita' | 'Pengumuman';
+  heroImage?: (string | null) | Media;
   content: {
     root: {
       type: string;
@@ -170,6 +166,14 @@ export interface Berita {
       version: number;
     };
     [k: string]: unknown;
+  };
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
   };
   slug?: string | null;
   slugLock?: boolean | null;
@@ -266,12 +270,7 @@ export interface File {
  */
 export interface Page {
   id: string;
-  title?: string | null;
-  /**
-   * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-   */
-  image?: (string | null) | Media;
-  description?: string | null;
+  title: string;
   hero: {
     type: 'none' | 'home' | 'default';
     title?: string | null;
@@ -362,6 +361,14 @@ export interface Page {
       | null;
   };
   layout: (ArchiveBlock | CallToActionBlock | ContentBlock | MediaBlock | FormBlock | FAQBlock)[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
   publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -1064,10 +1071,16 @@ export interface PayloadMigration {
  */
 export interface BeritaSelect<T extends boolean = true> {
   title?: T;
-  image?: T;
-  description?: T;
   type?: T;
+  heroImage?: T;
   content?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
   slug?: T;
   slugLock?: T;
   publishedAt?: T;
@@ -1173,8 +1186,6 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
-  image?: T;
-  description?: T;
   hero?:
     | T
     | {
@@ -1229,6 +1240,13 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         faqBlock?: T | FAQBlockSelect<T>;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
       };
   publishedAt?: T;
   slug?: T;

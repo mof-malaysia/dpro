@@ -41,9 +41,11 @@ export const Berita: CollectionConfig<'berita'> = {
   // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'berita'>
   defaultPopulate: {
     title: true,
-    image: true,
-    description: true,
     slug: true,
+    heroImage: true,
+    meta: {
+      description: true,
+    },
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
@@ -67,29 +69,12 @@ export const Berita: CollectionConfig<'berita'> = {
     useAsTitle: 'title',
   },
   fields: [
-    OverviewField({
-      titlePath: 'title',
-      descriptionPath: 'description',
-      imagePath: 'image',
-    }),
-    MetaTitleField({
-      hasGenerateFn: true,
-    }),
-    MetaImageField({
-      overrides: {
-        label: 'Image',
-      },
-      relationTo: 'media',
-    }),
-    MetaDescriptionField({}),
-    PreviewField({
-      // if the `generateUrl` function is configured
-      hasGenerateFn: true,
-
-      // field paths to match the target field for data
-      titlePath: 'title',
-      descriptionPath: 'description',
-    }),
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      unique: true,
+    },
     {
       name: 'type',
       label: 'Jenis',
@@ -98,21 +83,64 @@ export const Berita: CollectionConfig<'berita'> = {
       options: ['Artikel', 'Berita', 'Pengumuman'],
     },
     {
-      name: 'content',
-      type: 'richText',
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4', 'h5', 'h6'] }),
-            BlocksFeature({ blocks: [MediaBlock] }),
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-            HorizontalRuleFeature(),
-          ]
+      type: 'tabs',
+      tabs: [
+        {
+          fields: [
+            {
+              name: 'heroImage',
+              type: 'upload',
+              relationTo: 'media',
+            },
+            {
+              name: 'content',
+              type: 'richText',
+              editor: lexicalEditor({
+                features: ({ rootFeatures }) => {
+                  return [
+                    ...rootFeatures,
+                    HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4', 'h5', 'h6'] }),
+                    BlocksFeature({ blocks: [MediaBlock] }),
+                    FixedToolbarFeature(),
+                    InlineToolbarFeature(),
+                    HorizontalRuleFeature(),
+                  ]
+                },
+              }),
+              label: false,
+              required: true,
+            },
+          ],
+          label: 'Content',
         },
-      }),
-      required: true,
+        {
+          name: 'meta',
+          label: 'SEO',
+          fields: [
+            OverviewField({
+              titlePath: 'meta.title',
+              descriptionPath: 'meta.description',
+              imagePath: 'meta.image',
+            }),
+            MetaTitleField({
+              hasGenerateFn: true,
+            }),
+            MetaImageField({
+              relationTo: 'media',
+            }),
+
+            MetaDescriptionField({}),
+            PreviewField({
+              // if the `generateUrl` function is configured
+              hasGenerateFn: true,
+
+              // field paths to match the target field for data
+              titlePath: 'meta.title',
+              descriptionPath: 'meta.description',
+            }),
+          ],
+        },
+      ],
     },
     ...slugField(),
     {

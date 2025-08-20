@@ -12,7 +12,7 @@ import React from 'react'
 
 export type CardNewsData = Pick<
   Berita,
-  'description' | 'image' | 'publishedAt' | 'slug' | 'title' | 'type'
+  'heroImage' | 'meta' | 'publishedAt' | 'slug' | 'title' | 'type'
 >
 
 export const NewsCard: React.FC<{
@@ -24,7 +24,8 @@ export const NewsCard: React.FC<{
   const { card, link } = useClickableCard({})
   const { className, doc, title: titleFromProps } = props
 
-  const { description, image, publishedAt, slug, title, type } = doc || {}
+  const { heroImage, meta, publishedAt, slug, title, type } = doc || {}
+  const { description } = meta || {}
 
   const titleToUse = titleFromProps || title
   const href = `/berita/${slug}`
@@ -39,8 +40,8 @@ export const NewsCard: React.FC<{
       ref={card.ref}
     >
       <div className="relative w-full grow ">
-        {image && typeof image !== 'string' && (
-          <Media htmlElement={null} resource={image} imgClassName="object-cover h-[200px]" />
+        {heroImage && typeof heroImage !== 'string' && (
+          <Media htmlElement={null} resource={heroImage} imgClassName="object-cover h-[200px]" />
         )}
       </div>
       <div className="p-4.5 space-y-3">
