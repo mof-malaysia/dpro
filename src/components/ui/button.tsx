@@ -44,12 +44,12 @@ const buttonVariants = cva(
           'disabled:bg-bg-white-disabled disabled:text-txt-primary-disabled disabled:border-transparent',
         ],
         link: 'text-txt-primary hover:underline',
-        default: [
+        'primary-fill': [
           'bg-primary-600 border border-primary-600 text-white shadow-button',
           'hover:bg-primary-700',
           'disabled:bg-bg-primary-disabled disabled:text-white-disabled disabled:border-bg-primary-disabled',
         ],
-        outline: [
+        'primary-outline': [
           'bg-bg-white border border-otl-primary-200 text-txt-primary shadow-button',
           'hover:bg-bg-primary-50',
           'disabled:bg-bg-white-disabled disabled:text-txt-primary-disabled disabled:border-transparent',
@@ -102,7 +102,7 @@ const buttonVariants = cva(
       },
     ],
     defaultVariants: {
-      variant: 'default',
+      variant: 'default-outline',
       size: 'sm',
       iconOnly: false,
     },

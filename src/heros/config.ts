@@ -37,11 +37,16 @@ export const hero: Field = {
     {
       name: 'title',
       type: 'text',
-      required: true,
+      admin: {
+        condition: (_, { type }) => type !== 'home',
+      },
     },
     {
       name: 'richText',
       type: 'richText',
+      admin: {
+        condition: (_, { type }) => type !== 'home',
+      },
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
           return [
@@ -56,18 +61,50 @@ export const hero: Field = {
     },
     linkGroup({
       overrides: {
-        maxRows: 1,
+        admin: {
+          condition: (_, { type }) => type !== 'home',
+        },
       },
     }),
     {
-      name: 'media',
-      type: 'upload',
-      label: 'Hero Image',
+      name: 'sliderImage',
+      type: 'array',
       admin: {
-        condition: (_, { type } = {}) => ['home'].includes(type),
+        condition: (_, { type }) => type === 'home',
       },
-      relationTo: 'media',
-      required: true,
+      fields: [
+        {
+          name: 'media',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'richText',
+          type: 'richText',
+          editor: lexicalEditor({
+            features: ({ rootFeatures }) => {
+              return [
+                ...rootFeatures,
+                HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+                FixedToolbarFeature(),
+                InlineToolbarFeature(),
+              ]
+            },
+          }),
+          label: false,
+        },
+        linkGroup({
+          overrides: {
+            maxRows: 3,
+          },
+        }),
+      ],
     },
   ],
   label: false,

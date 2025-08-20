@@ -42,8 +42,8 @@ export const Berita: CollectionConfig<'berita'> = {
   defaultPopulate: {
     title: true,
     slug: true,
+    heroImage: true,
     meta: {
-      image: true,
       description: true,
     },
   },
@@ -74,6 +74,13 @@ export const Berita: CollectionConfig<'berita'> = {
       type: 'text',
       required: true,
       unique: true,
+    },
+    {
+      name: 'type',
+      label: 'Jenis',
+      type: 'select',
+      required: true,
+      options: ['Artikel', 'Berita', 'Pengumuman'],
     },
     {
       type: 'tabs',

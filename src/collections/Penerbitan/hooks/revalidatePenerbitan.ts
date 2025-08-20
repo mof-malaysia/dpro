@@ -15,6 +15,7 @@ export const revalidatePenerbitan: CollectionAfterChangeHook<Penerbitan> = ({
       payload.logger.info(`Revalidating penerbitan at path: ${path}`)
 
       revalidatePath(path)
+      revalidatePath('/')
       revalidateTag('penerbitan-sitemap')
     }
   }

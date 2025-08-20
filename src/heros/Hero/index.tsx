@@ -25,7 +25,9 @@ export const Hero: React.FC<{
             <BreadcrumbPage>{title}</BreadcrumbPage>
           </BreadcrumbItem>
         </Breadcrumb>
-        <h1 className="col-span-full">{title}</h1>
+        <h1 className="col-span-full font-heading font-semibold text-heading-sm md:text-heading-md">
+          {title}
+        </h1>
         {children}
       </Section>
     </Container>

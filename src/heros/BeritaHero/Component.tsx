@@ -57,7 +57,7 @@ export const BeritaHero: React.FC<{
         </Breadcrumb>
 
         <div className="flex flex-col gap-3">
-          <h1>{title}</h1>
+          <h1 className="font-heading font-semibold text-heading-sm md:text-heading-md">{title}</h1>
           {publishedAt && (
             <div className="flex gap-2 items-center text-txt-black-500 text-body-sm">
               <div className="flex gap-1 items-center">

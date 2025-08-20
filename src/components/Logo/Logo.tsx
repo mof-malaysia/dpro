@@ -1,14 +1,24 @@
 import { cn } from '@/utilities/ui'
+import Image from 'next/image'
 import { ComponentProps, FC, SVGProps } from 'react'
 
 export const Logo: FC<ComponentProps<'div'>> = (props) => (
   <div
     className={cn(
-      'flex items-center gap-x-2.5 whitespace-nowrap font-heading text-body-lg font-semibold text-txt-black-900',
+      'flex items-center gap-2 whitespace-nowrap font-heading text-body-lg font-semibold text-txt-black-900',
       props.className,
     )}
     {...props}
   >
+    <Image
+      className="w-auto h-8"
+      priority
+      loading="eager"
+      src="/jata-negara.png"
+      width={45}
+      height={32}
+      alt="Jata Negara"
+    />
     <LogoDPro />
     d.Pro
   </div>

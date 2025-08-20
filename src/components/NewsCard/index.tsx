@@ -6,10 +6,14 @@ import { formatDate } from '@/utilities/formatDateTime'
 import { cn } from '@/utilities/ui'
 import useClickableCard from '@/utilities/useClickableCard'
 import { ArrowOutgoingIcon } from '@govtechmy/myds-react/icon'
+import { Tag } from '@govtechmy/myds-react/tag'
 import Link from 'next/link'
 import React from 'react'
 
-export type CardNewsData = Pick<Berita, 'slug' | 'meta' | 'title' | 'publishedAt'>
+export type CardNewsData = Pick<
+  Berita,
+  'heroImage' | 'meta' | 'publishedAt' | 'slug' | 'title' | 'type'
+>
 
 export const NewsCard: React.FC<{
   alignItems?: 'center'
@@ -20,8 +24,8 @@ export const NewsCard: React.FC<{
   const { card, link } = useClickableCard({})
   const { className, doc, title: titleFromProps } = props
 
-  const { slug, meta, title, publishedAt } = doc || {}
-  const { image: metaImage } = meta || {}
+  const { heroImage, meta, publishedAt, slug, title, type } = doc || {}
+  const { description } = meta || {}
 
   const titleToUse = titleFromProps || title
   const href = `/berita/${slug}`
@@ -29,17 +33,25 @@ export const NewsCard: React.FC<{
   return (
     <article
       className={cn(
-        'group flex flex-col border rounded-lg overflow-hidden max-h-80',
+        'group flex flex-col border rounded-lg overflow-hidden',
         'hover:cursor-pointer hover:border-otl-primary-300 hover:ring ring-fr-primary',
         className,
       )}
       ref={card.ref}
     >
-      <div className="relative w-full grow">
-        {!metaImage && <></>}
-        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
+      <div className="relative w-full">
+        {heroImage && typeof heroImage !== 'string' && (
+          <Media
+            htmlElement={null}
+            resource={heroImage}
+            imgClassName="object-cover size-full max-h-[200px]"
+          />
+        )}
       </div>
-      <div className="relative p-4.5 space-y-4">
+      <div className="grow p-4.5 space-y-3">
+        <Tag size="small" variant="primary">
+          {type}
+        </Tag>
         {titleToUse && (
           <Link
             href={href}
@@ -49,6 +61,9 @@ export const NewsCard: React.FC<{
             {titleToUse}
           </Link>
         )}
+        {description && <p className="text-sm text-txt-black-500 line-clamp-3">{description}</p>}
+      </div>
+      <div className="relative p-4.5 pt-3">
         {publishedAt && <p className="text-sm text-txt-black-500">{formatDate(publishedAt)}</p>}
         <Button
           variant="unset"

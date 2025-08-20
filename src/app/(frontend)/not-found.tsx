@@ -7,10 +7,15 @@ export default function NotFound() {
   return (
     <div className="container py-28">
       <div className="prose dark:prose-invert max-w-none">
-        <h1 style={{ marginBottom: 0 }}>404</h1>
+        <h1
+          className="font-heading font-semibold text-heading-sm md:text-heading-md"
+          style={{ marginBottom: 0 }}
+        >
+          404
+        </h1>
         <p className="mb-4">This page could not be found.</p>
       </div>
-      <Button asChild variant="default">
+      <Button asChild variant="primary-fill">
         <Link href="/">Go home</Link>
       </Button>
     </div>

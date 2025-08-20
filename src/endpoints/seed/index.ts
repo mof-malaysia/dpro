@@ -2,7 +2,7 @@ import type { CollectionSlug, Payload, PayloadRequest, File } from 'payload'
 
 import { home } from './home'
 
-const collections: CollectionSlug[] = ['media', 'pages', 'forms', 'form-submissions', 'search']
+const collections: CollectionSlug[] = ['media', 'pages', 'forms', 'form-submissions']
 const globals = ['header', 'footer'] as const
 
 // Next.js revalidation errors are normal when seeding the database without a server running

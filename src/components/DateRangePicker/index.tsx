@@ -102,6 +102,7 @@ export const DateRangePicker: React.FC<{ pathname: string }> = ({ pathname }) =>
               </DrawerClose>
               <DrawerClose asChild>
                 <Button
+                  variant="primary-fill"
                   size="md"
                   onClick={() => {
                     if (dateRange) handleValueChange(dateRange)

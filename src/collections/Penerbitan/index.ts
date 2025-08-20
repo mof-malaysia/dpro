@@ -21,8 +21,21 @@ export const Penerbitan: CollectionConfig = {
   },
   fields: [
     {
+      name: 'image',
+      label: 'Gambar',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+    },
+    {
       name: 'name',
       label: 'Nama',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'description',
+      label: 'Keterangan',
       type: 'text',
       required: true,
     },

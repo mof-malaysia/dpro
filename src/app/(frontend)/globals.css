@@ -84,18 +84,11 @@
     --fr-secondary: var(--secondary-300) / 0.4;
   }
 
-  h1:not(.prose > h1) {
-    @apply font-heading font-semibold text-heading-sm md:text-heading-md;
-  }
-  h2:not(.prose > h2) {
-    @apply font-heading font-semibold text-heading-xs md:text-heading-sm;
-  }
-
   * {
     @apply border-otl-gray-200 ring-fr-primary;
   }
   body {
-    @apply bg-bg-white text-txt-black-900 min-h-[100vh] flex flex-col;
+    @apply bg-bg-white text-txt-black-900 min-h-dvh flex flex-col;
   }
 
   :focus:not(:focus-visible) {
