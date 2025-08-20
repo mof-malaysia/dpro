@@ -54,7 +54,7 @@ export default async function Page() {
 
               <div className="flex gap-2">
                 {directions.map(({ id, site, url }) => (
-                  <Button key={id} variant="outline" asChild>
+                  <Button key={id} variant="primary-outline" asChild>
                     <Link href={url} newTab underline="none">
                       <DirectionIcon />
                       {site}
