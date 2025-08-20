@@ -15,8 +15,8 @@ export const revalidateBerita: CollectionAfterChangeHook<Berita> = ({
 
       payload.logger.info(`Revalidating news at path: ${path}`)
 
-      revalidatePath('/berita')
-      revalidatePath(path)
+      const paths = ['/', '/berita', path]
+      paths.every((path) => revalidatePath(path))
       revalidateTag('berita-sitemap')
     }
 
@@ -26,8 +26,8 @@ export const revalidateBerita: CollectionAfterChangeHook<Berita> = ({
 
       payload.logger.info(`Revalidating old news at path: ${oldPath}`)
 
-      revalidatePath('/berita')
-      revalidatePath(oldPath)
+      const paths = ['/', '/berita', oldPath]
+      paths.every((path) => revalidatePath(path))
       revalidateTag('berita-sitemap')
     }
   }
@@ -36,8 +36,8 @@ export const revalidateBerita: CollectionAfterChangeHook<Berita> = ({
 
 export const revalidateDelete: CollectionAfterDeleteHook<Berita> = ({ doc, req: { context } }) => {
   if (!context.disableRevalidate) {
-    revalidatePath('/berita')
-    revalidatePath(`/berita/${doc?.slug}`)
+    const paths = ['/', '/berita', `/berita/${doc?.slug}`]
+    paths.every((path) => revalidatePath(path))
     revalidateTag('berita-sitemap')
   }
 
