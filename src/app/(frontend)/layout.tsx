@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
           <Masthead />
           <Header />
-          {children}
+          <main className="grow">{children}</main>
           <Footer />
         </Providers>
       </body>
