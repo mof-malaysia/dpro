@@ -24,9 +24,6 @@ import Autoplay from 'embla-carousel-autoplay'
 import React, { useEffect, useState } from 'react'
 
 export const HomeHero: React.FC<Page['hero']> = (props) => {
-  if (!props.sliderImage) return <></>
-  if (props.sliderImage.length <= 0) return <></>
-
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
 
@@ -48,6 +45,9 @@ export const HomeHero: React.FC<Page['hero']> = (props) => {
     'Soalan Lazim': ArrowOutgoingIcon,
     'Hubungi Kami': PhoneIcon,
   }
+
+  if (!props.sliderImage) return <></>
+  if (props.sliderImage.length <= 0) return <></>
 
   return (
     <Carousel
