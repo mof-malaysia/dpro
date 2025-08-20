@@ -37,8 +37,8 @@ export const RenderBlocks: React.FC<{
 
             if (Block) {
               return (
-                <div className={index % 2 === 1 ? 'bg-bg-primary-50' : ''}>
-                  <Container className="py-8 lg:py-16" key={index}>
+                <div className={index % 2 === 1 ? 'bg-bg-primary-50' : ''} key={index}>
+                  <Container className="py-8 lg:py-16">
                     {/* @ts-expect-error there may be some mismatch between the expected types here */}
                     <Block {...block} />
                   </Container>
