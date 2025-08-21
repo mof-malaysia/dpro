@@ -28,9 +28,8 @@ export const FAQBlock: React.FC<FAQBlockProps> = (props) => {
         >
           <rect x="0" width="242" height="1" fill="currentColor" />
         </svg>
-        <p className="text-center text-txt-black-700">
-          {desc && <RichText data={desc} enableGutter={false} />}
-        </p>
+
+        {desc && <RichText data={desc} enableGutter={false} className="text-center" />}
       </div>
 
       <Helpdesk {...helpdesk} />
@@ -46,7 +45,7 @@ const Helpdesk: React.FC<FAQBlockProps['helpdesk']> = (props) => {
 
   return (
     <div className="col-start-1 col-span-full lg:col-start-1 lg:col-span-4">
-      <article className="group flex flex-col border rounded-lg overflow-hidden">
+      <article className="group flex flex-col bg-bg-white border rounded-lg overflow-hidden">
         <div className="relative w-full grow">
           {!image && <></>}
           {image && typeof image !== 'string' && (
@@ -55,9 +54,8 @@ const Helpdesk: React.FC<FAQBlockProps['helpdesk']> = (props) => {
         </div>
         <div className="relative p-4.5 space-y-4">
           <div className="font-semibold">{title}</div>
-          <p className="text-sm text-txt-black-500">
-            {desc && <RichText data={desc} enableGutter={false} />}
-          </p>
+
+          {desc && <RichText data={desc} enableGutter={false} className="text-txt-black-500" />}
           {Array.isArray(links) && links.length > 0 && (
             <ul className="flex gap-4">
               {links.map(({ link }, i) => {
@@ -87,7 +85,7 @@ const FAQ: React.FC<FAQBlockProps['faq']> = (props) => {
   const { columns, title } = props
 
   return (
-    <div className="col-start-1 col-span-full lg:col-start-5 lg:col-span-6 space-y-6 p-6 border rounded-xl">
+    <div className="col-start-1 col-span-full lg:col-start-5 lg:col-span-6 space-y-6 p-6 bg-bg-white border rounded-xl">
       {title && <h2 className="font-semibold text-heading-xs lg:text-body-2xl">{title}</h2>}
       <Accordion type="single">
         {columns &&
