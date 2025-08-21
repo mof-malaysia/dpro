@@ -55,54 +55,7 @@ export default async function Page() {
         <Section className="flex flex-col gap-8">
           <div className="border border-collapse rounded-lg border-otl-gray-200">
             {dummy_data.map((tender) => (
-              <Card {...tender} />
-              // <article ref={card.ref} key={tender.slug}>
-              //   {/* <div className="table-row max-lg:hidden"> */}
-              //   <div className="table-cell py-4 px-4.5 space-y-2">
-              //     <div className="text-body-sm text-txt-black-700 ">
-              //       Tarikh Tutup: {formatDateTime(tender.deadline)}
-              //     </div>
-              //     <Link href={tender.slug} ref={link.ref} className="font-semibold">
-              //       {tender.title}
-              //     </Link>
-              //     {tender.new && (
-              //       <Tag size="small" variant="success" mode="pill" dot>
-              //         Baru
-              //       </Tag>
-              //     )}
-              //   </div>
-              //   <div className="table-cell py-4 px-4.5 text-txt-black-500">{tender.org}</div>
-              //   <div className="table-cell py-4 px-4.5">
-              //     <div className="flex gap-0.5 items-center px-1 py-0.5 border rounded-sm">
-              //       <AttachmentIcon className="size-4" />
-              //       <span className="text-body-xs">{tender.attachments}</span>
-              //     </div>
-              //   </div>
-              //   {/* </div> */}
-
-              //   {/* <div className="lg:hidden flex flex-col gap-2 p-3"> */}
-              //   <div className="flex gap-3 justify-between">
-              //     <div className="text-body-sm text-txt-black-700 ">
-              //       Tarikh Tutup: {formatDateTime(tender.deadline)}
-              //     </div>
-              //     {tender.new && (
-              //       <Tag size="small" variant="success" mode="pill" dot>
-              //         Baru
-              //       </Tag>
-              //     )}
-              //   </div>
-              //   <div className="text-txt-black-500">{tender.org}</div>
-
-              //   <Link href={tender.slug} ref={link.ref} className="font-semibold">
-              //     {tender.title}
-              //   </Link>
-
-              //   <div className="flex gap-0.5 items-center px-1 py-0.5 border rounded-sm w-fit">
-              //     <AttachmentIcon className="size-4" />
-              //     <span className="text-body-xs">{tender.attachments}</span>
-              //   </div>
-              //   {/* </div> */}
-              // </article>
+              <Card key={tender.slug} {...tender} />
             ))}
           </div>
         </Section>
