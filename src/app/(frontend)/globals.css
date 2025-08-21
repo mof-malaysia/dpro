@@ -95,3 +95,9 @@
     @apply outline-none;
   }
 }
+
+@layer utilities {
+  .underline {
+    text-underline-position: from-font;
+  }
+}
