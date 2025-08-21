@@ -22,7 +22,7 @@ export async function Footer() {
                   {...link}
                   appearance="unset"
                   size="unset"
-                  className="text-txt-black-700 hover:underline"
+                  className="text-txt-black-700 hover:underline font-normal"
                 />
               </li>
             ))}
