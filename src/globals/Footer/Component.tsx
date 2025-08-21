@@ -20,9 +20,9 @@ export async function Footer() {
               <li key={i}>
                 <CMSLink
                   {...link}
-                  appearance="unset"
+                  appearance="link"
                   size="unset"
-                  className="text-txt-black-700 hover:underline font-normal"
+                  className="text-txt-black-700 font-normal"
                 />
               </li>
             ))}
