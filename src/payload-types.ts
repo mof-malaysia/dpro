@@ -360,7 +360,7 @@ export interface Page {
         }[]
       | null;
   };
-  layout: (ArchiveBlock | CallToActionBlock | ContentBlock | MediaBlock | FormBlock | FAQBlock)[];
+  layout: (ArchiveBlock | CallToActionBlock | ContentBlock | MediaBlock | FormBlock | FAQBlock | TenderBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -818,6 +818,31 @@ export interface FAQBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TenderBlock".
+ */
+export interface TenderBlock {
+  title?: string | null;
+  desc?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'tender';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -1240,6 +1265,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         faqBlock?: T | FAQBlockSelect<T>;
+        tender?: T | TenderBlockSelect<T>;
       };
   meta?:
     | T
@@ -1379,6 +1405,16 @@ export interface FAQBlockSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TenderBlock_select".
+ */
+export interface TenderBlockSelect<T extends boolean = true> {
+  title?: T;
+  desc?: T;
   id?: T;
   blockName?: T;
 }
