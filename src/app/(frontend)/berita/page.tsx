@@ -7,18 +7,44 @@ import type { Metadata } from 'next/types'
 import { getPayload } from 'payload'
 import PageClient from './page.client'
 
-export const dynamic = 'force-static'
-
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
   const payload = await getPayload({ config: configPromise })
+  const query = (await searchParams).q
+  const page = (await searchParams).page || 1
+  const from = (await searchParams).dari
+  const to = (await searchParams).hingga
+
+  const sanitisedPageNumber = Number(page)
+  const limit = 12
 
   const berita = await payload.find({
     collection: 'berita',
     depth: 1,
-    limit: 12,
-    overrideAccess: false,
+    limit,
+    page: sanitisedPageNumber,
+    sort: '-publishedAt',
+    where: {
+      ...(query && {
+        title: {
+          contains: query,
+        },
+      }),
+      ...(from && {
+        publishedAt: {
+          greater_than_equal: from,
+        },
+      }),
+      ...(to && {
+        publishedAt: {
+          less_than_equal: to,
+        },
+      }),
+    },
   })
-  const { docs, limit, page, totalPages } = berita
 
   return (
     <div className="pb-12 lg:pb-[84px]">
@@ -26,16 +52,16 @@ export default async function Page() {
         <PageClient />
       </Hero>
       <Container>
-        <Section>
-          <CollectionArchive posts={docs} />
+        <Section className="flex flex-col gap-8">
+          <CollectionArchive posts={berita.docs} />
+
+          <div className="">
+            {berita.totalPages > 1 && (
+              <Pagination page={berita.page!} limit={berita.limit} totalPages={berita.totalPages} />
+            )}
+          </div>
         </Section>
       </Container>
-
-      <div className="container">
-        {totalPages > 1 && page && (
-          <Pagination page={page!} limit={limit} totalPages={totalPages} />
-        )}
-      </div>
     </div>
   )
 }

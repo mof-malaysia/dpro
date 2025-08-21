@@ -8,6 +8,7 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FAQBlock } from '@/blocks/FAQBlock/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { TenderBlock } from '@/blocks/TenderBlock/Component'
 import { Container } from '@/components/ui/container'
 
 const blockComponents = {
@@ -17,6 +18,7 @@ const blockComponents = {
   faqBlock: FAQBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  tender: TenderBlock,
 }
 
 export const RenderBlocks: React.FC<{

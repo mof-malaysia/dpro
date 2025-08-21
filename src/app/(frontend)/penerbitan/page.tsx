@@ -6,25 +6,51 @@ import configPromise from '@payload-config'
 import type { Metadata } from 'next/types'
 import { getPayload } from 'payload'
 import PageClient from './page.client'
+import { PageSizeSelect } from '@/components/PageSizeSelect'
 
-export const dynamic = 'force-static'
-
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
   const payload = await getPayload({ config: configPromise })
+
+  const query = (await searchParams).q
+  const page = (await searchParams).page || 1
+
+  const DEFAULT_PAGE_SIZE = 12
+  const options = [DEFAULT_PAGE_SIZE, DEFAULT_PAGE_SIZE * 2].map(String)
+  const pageSize = (await searchParams).limit || DEFAULT_PAGE_SIZE
+  const from = (await searchParams).dari
+  const to = (await searchParams).hingga
+
+  const sanitisedPageNumber = Number(page)
+  const sanitisedPageSize = Number(pageSize)
 
   const penerbitan = await payload.find({
     collection: 'penerbitan',
     depth: 1,
-    limit: 12,
+    limit: sanitisedPageSize,
+    page: sanitisedPageNumber,
     sort: '-publishedAt',
-    // overrideAccess: false,
-    // select: {
-    //   title: true,
-    //   slug: true,
-    //   meta: true,
-    // },
+    where: {
+      ...(query && {
+        name: {
+          contains: query,
+        },
+      }),
+      ...(from && {
+        publishedAt: {
+          greater_than_equal: from,
+        },
+      }),
+      ...(to && {
+        publishedAt: {
+          less_than_equal: to,
+        },
+      }),
+    },
   })
-  const { docs, limit, page, totalPages } = penerbitan
 
   return (
     <div className="pb-12 lg:pb-[84px]">
@@ -33,16 +59,26 @@ export default async function Page() {
       </Hero>
 
       <Container>
-        <Section>
-          <CollectionArchive posts={docs} />
+        <Section className="flex flex-col gap-8">
+          <CollectionArchive posts={penerbitan.docs} />
+
+          {penerbitan.totalPages > 1 && (
+            <div className="flex flex-col items-center lg:flex-row gap-8 lg:justify-between">
+              <div className="flex gap-3 items-center">
+                <p className="text-sm text-txt-black-500 font-medium whitespace-nowrap">
+                  Paparan setiap halaman:
+                </p>
+                <PageSizeSelect options={options} />
+              </div>
+              <Pagination
+                page={penerbitan.page!}
+                limit={penerbitan.limit}
+                totalPages={penerbitan.totalPages}
+              />
+            </div>
+          )}
         </Section>
       </Container>
-
-      <div className="container">
-        {totalPages > 1 && page && (
-          <Pagination limit={limit} page={page!} totalPages={totalPages} />
-        )}
-      </div>
     </div>
   )
 }
