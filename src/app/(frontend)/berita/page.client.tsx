@@ -11,10 +11,10 @@ const PageClient: React.FC = () => {
   return (
     <>
       <div className="xl:col-span-6">
-        <SearchBar pathname={pathname + '/cari'} />
+        <SearchBar pathname={pathname} />
       </div>
 
-      <DateRangePicker pathname={pathname + '/cari'} />
+      <DateRangePicker pathname={pathname} />
     </>
   )
 }

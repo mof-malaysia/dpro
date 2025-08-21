@@ -68,22 +68,22 @@ export const Pagination: React.FC<{
       onPageChange={(page) => {
         const newParams = new URLSearchParams(searchParams)
         newParams.set('page', String(page))
-        router.push(pathname + '/cari?' + newParams.toString())
+        router.push(pathname + '?' + newParams.toString())
       }}
       count={totalPages}
       limit={limit}
       type="default"
-      className="sm:justify-end"
+      className="lg:justify-end"
     >
       <PaginationContent className="gap-0 sm:gap-1">
         <PaginationItem>
           <PaginationPrevious
-            className="p-1.5 max-sm:size-9 sm:p-2 sm:mr-4"
+            className="p-2 max-sm:size-8 sm:p-2 mr-4 max-sm:[&_svg]:size-4"
             disabled={page === 1}
           />
         </PaginationItem>
         {visiblePages?.map((page) => (
-          <PaginationItem key={page} className="max-sm:*:size-9">
+          <PaginationItem key={page} className="max-sm:*:size-8">
             {page === '...' ? (
               <PaginationEllipsis />
             ) : (
@@ -93,7 +93,7 @@ export const Pagination: React.FC<{
         ))}
         <PaginationItem>
           <PaginationNext
-            className="p-1.5 max-sm:size-9 sm:p-2 sm:ml-4"
+            className="p-2 max-sm:size-8 sm:p-2 ml-4 max-sm:[&_svg]:size-4"
             disabled={page === totalPages}
           />
         </PaginationItem>
