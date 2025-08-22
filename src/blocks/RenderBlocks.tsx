@@ -23,8 +23,9 @@ const blockComponents = {
 
 export const RenderBlocks: React.FC<{
   blocks: Page['layout'][0][]
+  heroType: Page['hero']['type']
 }> = (props) => {
-  const { blocks } = props
+  const { blocks, heroType } = props
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
@@ -38,13 +39,19 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
-              return (
+              return heroType === 'home' ? (
+                // add background colour only for home layout
                 <div className={index % 2 === 1 ? 'bg-bg-primary-50' : ''} key={index}>
                   <Container className="py-8 lg:py-16">
                     {/* @ts-expect-error there may be some mismatch between the expected types here */}
                     <Block {...block} />
                   </Container>
                 </div>
+              ) : (
+                <Container className="pt-8 pb-8 lg:pb-16" key={index}>
+                  {/* @ts-expect-error there may be some mismatch between the expected types here */}
+                  <Block {...block} />
+                </Container>
               )
             }
           }
