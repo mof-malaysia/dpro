@@ -12,7 +12,11 @@ const urls = [NEXT_PUBLIC_SITE_URL, PRODUCTION_URL]
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [...urls.map((item) => new URL(item))],
+    remotePatterns: [
+      ...urls.map((item) => {
+        return new URL(item)
+      }),
+    ],
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
