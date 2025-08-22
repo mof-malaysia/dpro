@@ -1,6 +1,9 @@
 import { CMSLink } from '@/components/Link'
+import { Button } from '@/components/ui/button'
 import type { Header as HeaderType } from '@/payload-types'
-import { NavbarMenu } from '@govtechmy/myds-react/navbar'
+import { UserIcon } from '@govtechmy/myds-react/icon'
+import { NavbarMenu } from '@/components/ui/navbar'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
@@ -14,12 +17,24 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
           <CMSLink
             key={i}
             appearance="default-ghost"
-            className="hover:bg-bg-washed-active data-[active=true]:bg-bg-washed-active"
+            className="max-xl:w-full hover:bg-bg-washed-active data-[active=true]:bg-bg-washed-active"
             data-active={pathname === link.url}
             {...link}
           />
         )
       })}
+      <li className="px-2.5 py-1.5">
+        <Link
+          href="https://dpro.mof.gov.my/dpro/security/Login.action"
+          target="_blank"
+          className="xl:hidden"
+        >
+          <Button variant="primary-fill">
+            <UserIcon />
+            Log masuk
+          </Button>
+        </Link>
+      </li>
     </NavbarMenu>
   )
 }
