@@ -30,6 +30,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     reference,
     size: sizeFromProps,
     url,
+    ...otherProps
   } = props
 
   function isPenerbitan(item: any): item is Penerbitan {
@@ -58,7 +59,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   }
 
   return (
-    <Button asChild className={className} size={size} variant={appearance}>
+    <Button asChild className={className} size={size} variant={appearance} {...otherProps}>
       <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
         {children ? children : label}
       </Link>
