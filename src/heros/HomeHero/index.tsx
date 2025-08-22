@@ -61,7 +61,7 @@ export const HomeHero: React.FC<Page['hero']> = (props) => {
       <CarouselContent className="-ml-0">
         {props.sliderImage.map(({ id, links, media, richText, title }) => (
           <CarouselItem key={id} className="relative pl-0 text-white">
-            <div className="mx-auto max-w-screen-xl grid grid-cols-4 lg:grid-cols-12 z-10 px-4.5 lg:px-6 xl:px-0 pb-12 pt-36 h-full">
+            <div className="mx-auto max-w-screen-xl grid grid-cols-4 lg:grid-cols-12 z-10 px-4.5 lg:px-6 pb-12 pt-36 h-full">
               <div className="col-span-full md:col-span-5 flex flex-col gap-20 justify-between">
                 <div className="flex flex-col gap-8">
                   <div className="flex flex-col gap-4 md:gap-6">

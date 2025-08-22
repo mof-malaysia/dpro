@@ -12,7 +12,7 @@ import {
 
 export function Masthead() {
   return (
-    <MastheadRoot className="xl:px-6">
+    <MastheadRoot className="*:xl:px-6">
       <MastheadHeader>
         <MastheadTitle>Portal Rasmi Kerajaan Malaysia</MastheadTitle>
         <MastheadTrigger className="*:text-txt-secondary focus:ring-fr-secondary bg-otl-gray-200 group flex items-center gap-0.5 rounded-md p-1 px-1 focus:outline-none focus:ring focus:ring-inset sm:bg-transparent sm:pl-1.5 xl:rounded-sm">
