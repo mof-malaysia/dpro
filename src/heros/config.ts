@@ -59,6 +59,21 @@ export const hero: Field = {
       }),
       label: false,
     },
+    {
+      name: 'showLastUpdated',
+      type: 'checkbox',
+      admin: {
+        condition: (_, { type }) => type !== 'home',
+      },
+      defaultValue: false,
+    },
+    {
+      name: 'lastUpdated',
+      type: 'date',
+      admin: {
+        condition: (_, { showLastUpdated }) => showLastUpdated,
+      },
+    },
     linkGroup({
       overrides: {
         admin: {
