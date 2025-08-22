@@ -23,6 +23,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
+import { populatePublishedAt } from '@/hooks/populatePublishedAt'
 
 export const Berita: CollectionConfig<'berita'> = {
   slug: 'berita',
@@ -166,6 +167,7 @@ export const Berita: CollectionConfig<'berita'> = {
   ],
   hooks: {
     afterChange: [revalidateBerita],
+    beforeChange: [populatePublishedAt],
     afterDelete: [revalidateDelete],
   },
   versions: {
