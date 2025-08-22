@@ -3,11 +3,11 @@ import React from 'react'
 import type { Page } from '@/payload-types'
 
 import { HomeHero } from '@/heros/HomeHero'
-import { LowImpactHero } from '@/heros/LowImpact'
+import { Hero } from '@/heros/Hero'
 
 const heroes = {
   home: HomeHero,
-  default: LowImpactHero,
+  default: Hero,
 }
 
 export const RenderHero: React.FC<Page['hero']> = (props) => {
