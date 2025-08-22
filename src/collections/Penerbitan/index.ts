@@ -15,6 +15,7 @@ export const Penerbitan: CollectionConfig = {
   admin: {
     defaultColumns: ['name', 'publishedAt', '_status'],
     listSearchableFields: ['name'],
+    useAsTitle: 'name',
   },
   hooks: {
     afterChange: [revalidatePenerbitan],
