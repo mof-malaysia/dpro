@@ -1,9 +1,8 @@
 import { Button, type ButtonProps } from '@/components/ui/button'
+import type { Berita, Page, Penerbitan } from '@/payload-types'
 import { cn } from '@/utilities/ui'
 import Link from 'next/link'
 import React from 'react'
-
-import type { Page, Berita } from '@/payload-types'
 
 type CMSLinkType = {
   appearance?: 'inline' | ButtonProps['variant']
@@ -12,8 +11,8 @@ type CMSLinkType = {
   label?: string | null
   newTab?: boolean | null
   reference?: {
-    relationTo: 'berita' | 'pages'
-    value: Page | Berita | string | number
+    relationTo: 'berita' | 'pages' | 'penerbitan'
+    value: Berita | Page | Penerbitan | string | number
   } | null
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
@@ -33,10 +32,14 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     url,
   } = props
 
+  function isPenerbitan(item: any): item is Penerbitan {
+    return item.fileUpload !== undefined
+  }
+
   const href =
-    type === 'reference' && typeof reference?.value === 'object' && reference.value.slug
-      ? `${reference?.relationTo !== 'pages' ? `/${reference?.relationTo}` : ''}/${
-          reference.value.slug
+    type === 'reference' && reference && typeof reference.value === 'object'
+      ? `${reference.relationTo !== 'pages' ? `/${reference.relationTo}` : ''}${
+          isPenerbitan(reference.value) ? `?q=${reference.value.name}` : `/${reference?.value.slug}`
         }`
       : url
 
