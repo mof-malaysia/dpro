@@ -289,6 +289,8 @@ export interface Page {
       };
       [k: string]: unknown;
     } | null;
+    showLastUpdated?: boolean | null;
+    lastUpdated?: string | null;
     links?:
       | {
           link: {
@@ -302,6 +304,10 @@ export interface Page {
               | ({
                   relationTo: 'pages';
                   value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'penerbitan';
+                  value: string | Penerbitan;
                 } | null);
             url?: string | null;
             label: string;
@@ -345,6 +351,10 @@ export interface Page {
                     | ({
                         relationTo: 'pages';
                         value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'penerbitan';
+                        value: string | Penerbitan;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -378,6 +388,21 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "penerbitan".
+ */
+export interface Penerbitan {
+  id: string;
+  image: string | Media;
+  name: string;
+  description: string;
+  publishedAt: string;
+  fileUpload: string | File;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ArchiveBlock".
  */
 export interface ArchiveBlock {
@@ -400,21 +425,6 @@ export interface ArchiveBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "penerbitan".
- */
-export interface Penerbitan {
-  id: string;
-  image: string | Media;
-  name: string;
-  description: string;
-  publishedAt: string;
-  fileUpload: string | File;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -449,6 +459,10 @@ export interface CallToActionBlock {
             | ({
                 relationTo: 'pages';
                 value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'penerbitan';
+                value: string | Penerbitan;
               } | null);
           url?: string | null;
           label: string;
@@ -499,6 +513,10 @@ export interface ContentBlock {
             | ({
                 relationTo: 'pages';
                 value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'penerbitan';
+                value: string | Penerbitan;
               } | null);
           url?: string | null;
           label: string;
@@ -776,6 +794,10 @@ export interface FAQBlock {
               | ({
                   relationTo: 'pages';
                   value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'penerbitan';
+                  value: string | Penerbitan;
                 } | null);
             url?: string | null;
             label: string;
@@ -1217,6 +1239,8 @@ export interface PagesSelect<T extends boolean = true> {
         type?: T;
         title?: T;
         richText?: T;
+        showLastUpdated?: T;
+        lastUpdated?: T;
         links?:
           | T
           | {
@@ -1729,6 +1753,10 @@ export interface Header {
             | ({
                 relationTo: 'pages';
                 value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'penerbitan';
+                value: string | Penerbitan;
               } | null);
           url?: string | null;
           label: string;
@@ -1758,6 +1786,10 @@ export interface Footer {
             | ({
                 relationTo: 'pages';
                 value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'penerbitan';
+                value: string | Penerbitan;
               } | null);
           url?: string | null;
           label: string;

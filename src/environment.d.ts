@@ -3,8 +3,8 @@ declare global {
     interface ProcessEnv {
       PAYLOAD_SECRET: string
       DATABASE_URI: string
-      NEXT_PUBLIC_SERVER_URL: string
-      PROJECT_PRODUCTION_URL: string
+      NEXT_PUBLIC_SITE_URL: string
+      PRODUCTION_URL: string
 
       APP_ENV: string
       AUTH_TOKEN: string

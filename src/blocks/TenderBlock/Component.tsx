@@ -13,7 +13,7 @@ export const TenderBlock: React.FC<FAQBlockProps> = (props) => {
 
   return (
     <Section className="space-y-12">
-      <TenderWIP className="mx-auto" />
+      <TenderWIP className="max-sm:w-[calc(100dvw-36px)] mx-auto" />
 
       <div className="col-start-1 col-span-full lg:col-start-2 lg:col-span-8 flex flex-col items-center space-y-3 lg:space-y-6">
         <h2 className="font-heading font-semibold text-heading-xs md:text-heading-sm max-w-screen-sm text-balance text-center">

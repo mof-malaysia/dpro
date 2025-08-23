@@ -22,7 +22,7 @@ export const BeritaHero: React.FC<{
 
   const readTimeEstimate = getReadTimeEstimate(content.root.children as any)
 
-  const SITE_URL = process.env.NEXT_PUBLIC_SERVER_URL || process.env.PROJECT_PRODUCTION_URL
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.PRODUCTION_URL
   const URL = `${SITE_URL}/berita/${slug}`
 
   const SHARE_OPTIONS = [

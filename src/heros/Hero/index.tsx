@@ -1,5 +1,7 @@
-import React from 'react'
-
+import RichText from '@/components/RichText'
+import { Container, Section } from '@/components/ui/container'
+import type { Page } from '@/payload-types'
+import { formatDateTime } from '@/utilities/formatDateTime'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,14 +9,22 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@govtechmy/myds-react/breadcrumb'
-import { Container, Section } from '@/components/ui/container'
+import React from 'react'
 
-export const Hero: React.FC<{
-  children?: React.ReactNode
-  title: string
-}> = ({ children, title }) => {
+type HeroType =
+  | {
+      children?: React.ReactNode
+      lastUpdated?: never
+      showLastUpdated?: never
+      title?: string
+    }
+  | (Page['hero'] & {
+      children?: never
+    })
+
+export const Hero: React.FC<HeroType> = ({ children, lastUpdated, showLastUpdated, title }) => {
   return (
-    <Container className="pt-8 pb-6 lg:pt-16 lg:pb-8">
+    <Container className="pt-8 lg:pt-16 pb-6 lg:pb-8">
       <Section className="grid grid-cols-subgrid gap-y-6 *:col-span-full">
         <Breadcrumb variant="default">
           <BreadcrumbItem>
@@ -25,10 +35,11 @@ export const Hero: React.FC<{
             <BreadcrumbPage>{title}</BreadcrumbPage>
           </BreadcrumbItem>
         </Breadcrumb>
-        <h1 className="col-span-full font-heading font-semibold text-heading-sm md:text-heading-md">
-          {title}
-        </h1>
-        {children}
+        <h1 className="font-heading font-semibold text-heading-sm md:text-heading-md">{title}</h1>
+        {showLastUpdated && lastUpdated && (
+          <p className="text-txt-black-500">Kemaskini terakhir: {formatDateTime(lastUpdated)}</p>
+        )}
+        {children && children}
       </Section>
     </Container>
   )

@@ -1,10 +1,10 @@
 import canUseDOM from './canUseDOM'
 
 export const getServerSideURL = () => {
-  let url = process.env.NEXT_PUBLIC_SERVER_URL
+  let url = process.env.NEXT_PUBLIC_SITE_URL
 
-  if (!url && process.env.PROJECT_PRODUCTION_URL) {
-    return process.env.PROJECT_PRODUCTION_URL
+  if (!url && process.env.PRODUCTION_URL) {
+    return process.env.PRODUCTION_URL
   }
 
   if (!url) {
@@ -23,9 +23,9 @@ export const getClientSideURL = () => {
     return `${protocol}//${domain}${port ? `:${port}` : ''}`
   }
 
-  if (process.env.PROJECT_PRODUCTION_URL) {
-    return process.env.PROJECT_PRODUCTION_URL
+  if (process.env.PRODUCTION_URL) {
+    return process.env.PRODUCTION_URL
   }
 
-  return process.env.NEXT_PUBLIC_SERVER_URL || ''
+  return process.env.NEXT_PUBLIC_SITE_URL || ''
 }

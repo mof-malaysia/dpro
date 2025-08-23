@@ -1,28 +1,40 @@
-import React from 'react'
-
+import { CMSLink } from '@/components/Link'
+import { Button } from '@/components/ui/button'
 import type { Header as HeaderType } from '@/payload-types'
-import { NavbarMenu, NavbarMenuItem } from '@govtechmy/myds-react/navbar'
+import { UserIcon } from '@govtechmy/myds-react/icon'
+import { NavbarMenu } from '@/components/ui/navbar'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import React from 'react'
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || []
-
+  const pathname = usePathname()
   return (
     <NavbarMenu>
       {navItems.map(({ link }, i) => {
-        const reference = link.reference
-          ? typeof link.reference.value === 'string'
-            ? link.reference.value
-            : link.reference.value.slug
-          : link.url
-        const url = reference === 'home' ? '/' : reference
-        const href = url || '#'
-
         return (
-          <NavbarMenuItem key={i} href={href}>
-            {link.label}
-          </NavbarMenuItem>
+          <CMSLink
+            key={i}
+            appearance="default-ghost"
+            className="max-xl:w-full hover:bg-bg-washed-active data-[active=true]:bg-bg-washed-active"
+            data-active={pathname === link.url}
+            {...link}
+          />
         )
       })}
+      <li className="px-2.5 py-1.5">
+        <Link
+          href="https://dpro.mof.gov.my/dpro/security/Login.action"
+          target="_blank"
+          className="xl:hidden"
+        >
+          <Button variant="primary-fill">
+            <UserIcon />
+            Log masuk
+          </Button>
+        </Link>
+      </li>
     </NavbarMenu>
   )
 }
