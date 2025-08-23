@@ -2,7 +2,7 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 import redirects from './redirects.js'
 
-const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL
+const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://dpro.mof.gov.my'
 const PRODUCTION_URL = process.env.PRODUCTION_URL
   ? process.env.PRODUCTION_URL
   : undefined || process.env.__NEXT_PRIVATE_ORIGIN || 'http://localhost:3000'
