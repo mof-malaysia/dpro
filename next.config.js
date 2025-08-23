@@ -14,7 +14,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       ...urls.map((item) => {
-        return new URL(item)
+        const url = new URL(item)
+
+        return {
+          hostname: url.hostname,
+          protocol: url.protocol.replace(':', ''),
+        }
       }),
     ],
   },
