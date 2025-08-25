@@ -78,7 +78,7 @@ export const ArchiveBlock: React.FC<
       )}
 
       {relationTo === 'penerbitan' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {posts?.map((result, index) => {
             if (typeof result === 'object' && result !== null) {
               return (
