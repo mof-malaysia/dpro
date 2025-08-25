@@ -61,62 +61,37 @@ export const HomeHero: React.FC<Page['hero']> = (props) => {
       <CarouselContent className="-ml-0">
         {props.sliderImage.map(({ id, links, media, richText, title }) => (
           <CarouselItem key={id} className="relative pl-0 text-white">
-            <div className="mx-auto max-w-screen-xl grid grid-cols-4 lg:grid-cols-12 z-10 px-4.5 lg:px-6 pb-12 pt-36 h-full">
-              <div className="col-span-full md:col-span-5 flex flex-col gap-20 justify-between">
-                <div className="flex flex-col gap-8">
-                  <div className="flex flex-col gap-4 md:gap-6">
-                    <h1 className="font-heading font-semibold text-heading-sm md:text-heading-md text-white">
-                      {title}
-                    </h1>
-                    {richText && (
-                      <RichText className="[&_*]:text-white" data={richText} enableGutter={false} />
-                    )}
-                  </div>
-                  {Array.isArray(links) && links.length > 0 && (
-                    <ul className="flex flex-wrap gap-3 lg:gap-4">
-                      {links.map(({ link }, i) => {
-                        const label = link.label
-                        const Icon = icon[label] || ArrowOutgoingIcon
-                        return (
-                          <li key={i}>
-                            <CMSLink {...link}>
-                              {label}
-                              <Icon />
-                            </CMSLink>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-x-3">
-                  <CarouselPrevious variant="unset" className="transform-none active:ring-0" />
-                  <div className="flex items-center gap-x-2">
-                    {props.sliderImage?.map((_, i) => (
-                      <svg
-                        key={i}
-                        viewBox={i === current ? '0 0 15 8' : '0 0 8 8'}
-                        className={cn(
-                          'transition-[colors,_width] duration-300 ease-in-out',
-                          i === current
-                            ? 'h-2 w-[15px] text-txt-white'
-                            : 'size-2 text-txt-white-disabled',
-                        )}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect
-                          x="0"
-                          width={i === current ? 15 : 8}
-                          height="8"
-                          rx="4"
-                          fill="currentColor"
-                        />
-                      </svg>
-                    ))}
-                  </div>
-                  <CarouselNext variant="unset" className="transform-none active:ring-0" />
-                </div>
+            <div className="mx-auto max-w-screen-xl z-10 px-4.5 lg:px-6 py-32 lg:py-40 h-full">
+              <div className="flex flex-col gap-y-4 md:gap-y-6">
+                {title && (
+                  <RichText
+                    className="font-barlow text-balance mx-0 text-heading-sm md:text-heading-md prose-h1:text-heading-xl prose-h1:md:text-heading-2xl prose-h1:text-warning-400 prose-h1:font-bold prose-h1:my-0 prose-p:text-white prose-p:my-0"
+                    data={title}
+                  />
+                )}
+                {richText && (
+                  <RichText
+                    className="mx-0 max-w-[55ch] text-balance [&_*]:text-white"
+                    data={richText}
+                    enableGutter={false}
+                  />
+                )}
+                {Array.isArray(links) && links.length > 0 && (
+                  <ul className="flex flex-wrap gap-3 lg:gap-4">
+                    {links.map(({ link }, i) => {
+                      const label = link.label
+                      const Icon = icon[label] || ArrowOutgoingIcon
+                      return (
+                        <li key={i}>
+                          <CMSLink {...link}>
+                            {label}
+                            <Icon />
+                          </CMSLink>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                )}
               </div>
             </div>
             <Media
@@ -129,6 +104,25 @@ export const HomeHero: React.FC<Page['hero']> = (props) => {
           </CarouselItem>
         ))}
       </CarouselContent>
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-x-3">
+        <CarouselPrevious variant="unset" className="text-white transform-none active:ring-0" />
+        <div className="flex items-center gap-x-2">
+          {props.sliderImage?.map((_, i) => (
+            <svg
+              key={i}
+              viewBox={i === current ? '0 0 15 8' : '0 0 8 8'}
+              className={cn(
+                'transition-[colors,_width] duration-300 ease-in-out',
+                i === current ? 'h-2 w-[15px] text-txt-white' : 'size-2 text-txt-white-disabled',
+              )}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="0" width={i === current ? 15 : 8} height="8" rx="4" fill="currentColor" />
+            </svg>
+          ))}
+        </div>
+        <CarouselNext variant="unset" className="text-white transform-none active:ring-0" />
+      </div>
     </Carousel>
   )
 }

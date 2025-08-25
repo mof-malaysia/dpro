@@ -1,13 +1,13 @@
-import type { Field } from 'payload'
-
+import { linkGroup } from '@/fields/linkGroup'
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
+  ParagraphFeature,
+  TextStateFeature,
 } from '@payloadcms/richtext-lexical'
-
-import { linkGroup } from '@/fields/linkGroup'
+import type { Field } from 'payload'
 
 export const hero: Field = {
   name: 'hero',
@@ -96,7 +96,28 @@ export const hero: Field = {
         },
         {
           name: 'title',
-          type: 'text',
+          type: 'richText',
+          editor: lexicalEditor({
+            features: () => {
+              return [
+                ParagraphFeature(),
+                HeadingFeature({ enabledHeadingSizes: ['h1'] }),
+                FixedToolbarFeature(),
+                TextStateFeature({
+                  state: {
+                    color: {
+                      yellow: {
+                        css: {
+                          color: '#FACC15',
+                        },
+                        label: 'Yellow',
+                      },
+                    },
+                  },
+                }),
+              ]
+            },
+          }),
           required: true,
         },
         {
