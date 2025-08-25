@@ -81,6 +81,7 @@ const config = {
         'fr-secondary': 'rgb(var(--fr-secondary))',
       },
       fontFamily: {
+        barlow: 'var(--font-barlow)',
         body: 'var(--font-body)',
         heading: 'var(--font-heading)',
       },
