@@ -89,7 +89,7 @@ export const BeritaHero: React.FC<{
           <Media
             priority
             loading="eager"
-            imgClassName="object-cover rounded-md"
+            imgClassName="size-full object-cover rounded-md"
             resource={heroImage}
           />
         )}

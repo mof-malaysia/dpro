@@ -1,13 +1,13 @@
-import type { Field } from 'payload'
-
+import { SliderHeader } from '@/blocks/SliderHeader/config'
+import { linkGroup } from '@/fields/linkGroup'
 import {
+  BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
-
-import { linkGroup } from '@/fields/linkGroup'
+import type { Field } from 'payload'
 
 export const hero: Field = {
   name: 'hero',
@@ -96,7 +96,18 @@ export const hero: Field = {
         },
         {
           name: 'title',
-          type: 'text',
+          type: 'richText',
+          editor: lexicalEditor({
+            features: () => {
+              return [
+                BlocksFeature({
+                  blocks: [SliderHeader],
+                }),
+                HeadingFeature({ enabledHeadingSizes: ['h1'] }),
+                FixedToolbarFeature(),
+              ]
+            },
+          }),
           required: true,
         },
         {

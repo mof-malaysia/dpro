@@ -96,7 +96,7 @@ export const FileCard: React.FC<{
               <Media
                 htmlElement={null}
                 resource={image}
-                imgClassName="border rounded-md object-cover h-[250px]"
+                imgClassName="border rounded-md object-cover w-full h-[250px]"
               />
             )}
             {description && <DialogDescription>{description}</DialogDescription>}
@@ -122,7 +122,7 @@ export const FileCard: React.FC<{
       <DialogTrigger asChild>
         <article
           className={cn(
-            orientation === 'vertical' ? 'lg:flex-col' : 'lg:flex-row',
+            orientation === 'vertical' ? 'md:flex-col' : 'md:flex-row',
             'group flex flex-col gap-4 p-4.5 border rounded-lg overflow-hidden',
             'hover:cursor-pointer hover:border-otl-primary-300 hover:ring ring-fr-primary',
             className,
@@ -132,16 +132,17 @@ export const FileCard: React.FC<{
             <Media
               htmlElement={null}
               resource={image}
+              pictureClassName="shrink-0"
               imgClassName={cn(
                 'border rounded-md object-cover',
-                orientation === 'vertical' ? 'h-[200px]' : 'shrink-0 w-[180px] h-[150px]',
+                orientation === 'vertical' ? 'w-full h-[200px]' : 'shrink-0 w-[180px] h-[150px]',
               )}
             />
           ) : (
             <div
               className={cn(
                 'border rounded-md',
-                orientation === 'vertical' ? 'h-[200px]' : 'shrink-0 w-[180px] h-[150px]',
+                orientation === 'vertical' ? 'w-full h-[200px]' : 'shrink-0 w-[180px] h-[150px]',
               )}
             />
           )}
@@ -172,7 +173,7 @@ export const FileCard: React.FC<{
             <Media
               htmlElement={null}
               resource={image}
-              imgClassName="border rounded-md object-cover h-[350px]"
+              imgClassName="border rounded-md object-cover w-full h-[350px]"
             />
           )}
           {description && <DialogDescription>{description}</DialogDescription>}

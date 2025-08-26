@@ -15,12 +15,16 @@ import type {
   // BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
+  SliderHeader as SliderHeaderProps,
 } from '@/payload-types'
 // import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+import { SliderHeader } from '@/blocks/SliderHeader/Component'
 import { cn } from '@/utilities/ui'
 
-type NodeTypes = DefaultNodeTypes | SerializedBlockNode<CTABlockProps | MediaBlockProps> // | BannerBlockProps>
+type NodeTypes =
+  | DefaultNodeTypes
+  | SerializedBlockNode<CTABlockProps | MediaBlockProps | SliderHeaderProps> // | BannerBlockProps>
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -46,6 +50,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
       />
     ),
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
+    sliderHeader: ({ node }) => <SliderHeader {...node.fields} />,
   },
 })
 

@@ -54,7 +54,7 @@ export default async function Page({
 
   return (
     <div className="pb-12 lg:pb-[84px]">
-      <Hero title="Penerbitan">
+      <Hero title="Dokumentasi">
         <PageClient />
       </Hero>
 
@@ -85,6 +85,6 @@ export default async function Page({
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Penerbitan`,
+    title: `Dokumentasi`,
   }
 }
