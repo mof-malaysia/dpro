@@ -65,7 +65,7 @@ export const HomeHero: React.FC<Page['hero']> = (props) => {
               <div className="flex flex-col gap-y-4 md:gap-y-6 max-w-prose">
                 {title && (
                   <RichText
-                    className="mx-0 text-balance font-semibold font-heading text-heading-sm md:text-heading-md text-white"
+                    className="mx-0 text-balance font-semibold font-heading text-heading-sm md:text-heading-md prose-h1:text-heading-lg md:prose-h1:text-heading-xl"
                     data={title}
                     enableProse={false}
                   />
@@ -106,7 +106,7 @@ export const HomeHero: React.FC<Page['hero']> = (props) => {
         ))}
       </CarouselContent>
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-x-3">
-        <CarouselPrevious variant="unset" className="text-white transform-none active:ring-0" />
+        <CarouselPrevious variant="unset" className="text-white transform-none focus:ring-0" />
         <div className="flex items-center gap-x-2">
           {props.sliderImage?.map((_, i) => (
             <svg
@@ -122,7 +122,7 @@ export const HomeHero: React.FC<Page['hero']> = (props) => {
             </svg>
           ))}
         </div>
-        <CarouselNext variant="unset" className="text-white transform-none active:ring-0" />
+        <CarouselNext variant="unset" className="text-white transform-none focus:ring-0" />
       </div>
     </Carousel>
   )

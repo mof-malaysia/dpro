@@ -1,11 +1,11 @@
-import { SliderHeader } from '@/blocks/SliderHeader/config'
+import { textState } from '@/components/RichText/textConverter'
 import { linkGroup } from '@/fields/linkGroup'
 import {
-  BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
+  TextStateFeature,
 } from '@payloadcms/richtext-lexical'
 import type { Field } from 'payload'
 
@@ -100,11 +100,11 @@ export const hero: Field = {
           editor: lexicalEditor({
             features: () => {
               return [
-                BlocksFeature({
-                  blocks: [SliderHeader],
-                }),
                 HeadingFeature({ enabledHeadingSizes: ['h1'] }),
                 FixedToolbarFeature(),
+                TextStateFeature({
+                  state: textState,
+                }),
               ]
             },
           }),

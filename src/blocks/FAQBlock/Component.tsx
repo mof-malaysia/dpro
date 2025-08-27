@@ -49,7 +49,11 @@ const Helpdesk: React.FC<FAQBlockProps['helpdesk']> = (props) => {
         <div className="relative w-full grow">
           {!image && <></>}
           {image && typeof image !== 'string' && (
-            <Media htmlElement={null} resource={image} imgClassName="h-[240px]" />
+            <Media
+              htmlElement={null}
+              resource={image}
+              imgClassName="w-full object-cover h-[240px]"
+            />
           )}
         </div>
         <div className="relative p-4.5 space-y-4">

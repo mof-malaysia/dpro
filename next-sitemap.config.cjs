@@ -5,7 +5,7 @@ const SITE_URL =
 module.exports = {
   siteUrl: SITE_URL,
   generateRobotsTxt: true,
-  exclude: ['/berita-sitemap.xml', '/pages-sitemap.xml', '/*', '/berita/*'],
+  exclude: ['/berita-sitemap.xml', '/pages-sitemap.xml', '/berita/*'],
   robotsTxtOptions: {
     policies: [
       {
