@@ -17,7 +17,7 @@ interface HeaderClientProps {
 
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   return (
-    <Navbar className="*:xl:px-6">
+    <Navbar className="*:px-4.5 *:xl:px-6">
       <Link href="/">
         <Logo />
       </Link>

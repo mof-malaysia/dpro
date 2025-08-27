@@ -13,7 +13,7 @@ export async function Footer() {
         <p className="text-txt-black-500">
           © {new Date().getFullYear()} Kementerian Kewangan. Hak Cipta Terpelihara.
         </p>
-        <ul className="flex flex-wrap gap-3 text-txt-black-700">
+        <ul className="flex flex-wrap gap-1 text-txt-black-700">
           {navItems &&
             navItems.length > 0 &&
             navItems.map(({ link }, i) => (
@@ -21,8 +21,7 @@ export async function Footer() {
                 <CMSLink
                   {...link}
                   appearance="link"
-                  size="unset"
-                  className="text-txt-black-700 font-normal"
+                  className="text-txt-black-700 font-normal p-1"
                 />
               </li>
             ))}
