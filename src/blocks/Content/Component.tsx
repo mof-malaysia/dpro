@@ -1,5 +1,5 @@
 import RichText from '@/components/RichText'
-import { Container, Section } from '@/components/ui/container'
+import { Section } from '@/components/ui/container'
 import type { ContentBlock as ContentBlockProps } from '@/payload-types'
 import { cn } from '@/utilities/ui'
 import React from 'react'
@@ -17,7 +17,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
   return (
     <>
-      <Section>
+      <Section className="grid grid-cols-4 lg:grid-cols-12 gap-6">
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
