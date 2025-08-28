@@ -1,11 +1,11 @@
 import type { CollectionConfig } from 'payload'
-import { revalidatePenerbitan } from './hooks/revalidatePenerbitan'
+import { revalidateDokumentasi } from './hooks/revalidateDokumentasi'
 
-export const Penerbitan: CollectionConfig = {
-  slug: 'penerbitan',
+export const Dokumentasi: CollectionConfig = {
+  slug: 'dokumentasi',
   labels: {
-    singular: 'Penerbitan',
-    plural: 'Penerbitan',
+    singular: 'Dokumentasi',
+    plural: 'Dokumentasi',
   },
   defaultSort: 'publishedAt',
   timestamps: true,
@@ -18,7 +18,7 @@ export const Penerbitan: CollectionConfig = {
     useAsTitle: 'name',
   },
   hooks: {
-    afterChange: [revalidatePenerbitan],
+    afterChange: [revalidateDokumentasi],
   },
   fields: [
     {

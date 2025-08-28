@@ -1,5 +1,5 @@
 import { Button, type ButtonProps } from '@/components/ui/button'
-import type { Berita, Page, Penerbitan } from '@/payload-types'
+import type { Berita, Page, Dokumentasi } from '@/payload-types'
 import { cn } from '@/utilities/ui'
 import Link from 'next/link'
 import React from 'react'
@@ -11,8 +11,8 @@ type CMSLinkType = {
   label?: string | null
   newTab?: boolean | null
   reference?: {
-    relationTo: 'berita' | 'pages' | 'penerbitan'
-    value: Berita | Page | Penerbitan | string | number
+    relationTo: 'berita' | 'pages' | 'dokumentasi'
+    value: Berita | Page | Dokumentasi | string | number
   } | null
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
@@ -33,14 +33,16 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     ...otherProps
   } = props
 
-  function isPenerbitan(item: any): item is Penerbitan {
+  function isDokumentasi(item: any): item is Dokumentasi {
     return item.fileUpload !== undefined
   }
 
   const href =
     type === 'reference' && reference && typeof reference.value === 'object'
       ? `${reference.relationTo !== 'pages' ? `/${reference.relationTo}` : ''}${
-          isPenerbitan(reference.value) ? `?q=${reference.value.name}` : `/${reference?.value.slug}`
+          isDokumentasi(reference.value)
+            ? `?q=${reference.value.name}`
+            : `/${reference?.value.slug}`
         }`
       : url
 

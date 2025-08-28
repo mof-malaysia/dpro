@@ -38,8 +38,8 @@ export const Archive: Block = {
           value: 'berita',
         },
         {
-          label: 'Penerbitan',
-          value: 'penerbitan',
+          label: 'Dokumentasi',
+          value: 'dokumentasi',
         },
       ],
       required: true,
@@ -62,7 +62,7 @@ export const Archive: Block = {
       },
       hasMany: true,
       label: 'Selection',
-      relationTo: ['berita', 'penerbitan'],
+      relationTo: ['berita', 'dokumentasi'],
     },
   ],
   labels: {
