@@ -32,7 +32,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
   return (
     <figure
       className={cn(
-        'my-4 space-y-3 w-full lg:min-w-screen-sm h-auto select-none',
+        'space-y-3 w-full lg:min-w-screen-sm h-auto select-none',
         {
           container: enableGutter,
         },
@@ -41,6 +41,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
     >
       {(media || staticImage) && (
         <Media
+          htmlElement={null}
           imgClassName={cn('border rounded-md', imgClassName)}
           resource={media}
           src={staticImage}
