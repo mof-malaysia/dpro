@@ -61,7 +61,7 @@ export const NewsCard: React.FC<{
             {titleToUse}
           </Link>
         )}
-        {description && <p className="text-sm text-txt-black-500 line-clamp-3">{description}</p>}
+        {description && <p className="text-txt-black-500 line-clamp-3">{description}</p>}
       </div>
       <div className="relative p-4.5 pt-3">
         {publishedAt && <p className="text-sm text-txt-black-500">{formatDate(publishedAt)}</p>}
