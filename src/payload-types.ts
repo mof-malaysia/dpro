@@ -274,21 +274,6 @@ export interface Page {
   hero: {
     type: 'none' | 'home' | 'default';
     title?: string | null;
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
     showLastUpdated?: boolean | null;
     lastUpdated?: string | null;
     links?:

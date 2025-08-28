@@ -42,24 +42,6 @@ export const hero: Field = {
       },
     },
     {
-      name: 'richText',
-      type: 'richText',
-      admin: {
-        condition: (_, { type }) => type !== 'home',
-      },
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-          ]
-        },
-      }),
-      label: false,
-    },
-    {
       name: 'showLastUpdated',
       type: 'checkbox',
       admin: {
