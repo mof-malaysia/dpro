@@ -8,13 +8,6 @@ import { CMSLink } from '../../components/Link'
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const { columns } = props
 
-  const colsSpanClasses = {
-    full: '12',
-    half: '6',
-    oneThird: '4',
-    twoThirds: '8',
-  }
-
   return (
     <>
       <Section className="grid grid-cols-4 lg:grid-cols-12 gap-6">
@@ -25,8 +18,12 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
             return (
               <div
-                className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
+                className={cn('col-span-4', {
                   'md:col-span-2': size !== 'full',
+                  'lg:col-span-4': size === 'oneThird',
+                  'lg:col-span-6': size === 'half',
+                  'lg:col-span-8': size === 'twoThirds',
+                  'lg:col-span-12': size === 'full',
                 })}
                 key={index}
               >
