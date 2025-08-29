@@ -12,7 +12,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import type { Penerbitan } from '@/payload-types'
+import type { Dokumentasi } from '@/payload-types'
 import { cn } from '@/utilities/ui'
 import {
   Dialog,
@@ -29,7 +29,7 @@ import { ArrowOutgoingIcon, CrossIcon, DownloadIcon } from '@govtechmy/myds-reac
 import Link from 'next/link'
 import React from 'react'
 
-export type CardFileData = Pick<Penerbitan, 'description' | 'image' | 'name' | 'fileUpload'>
+export type CardFileData = Pick<Dokumentasi, 'description' | 'image' | 'name' | 'fileUpload'>
 
 export const FileCard: React.FC<{
   orientation?: 'horizontal' | 'vertical'

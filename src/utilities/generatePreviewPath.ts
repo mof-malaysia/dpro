@@ -1,9 +1,9 @@
 import { PayloadRequest, CollectionSlug } from 'payload'
 
-const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
+export const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
   berita: '/berita',
   pages: '',
-  penerbitan: '/dokumentasi',
+  dokumentasi: '/dokumentasi',
 }
 
 type Props = {

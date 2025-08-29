@@ -30,6 +30,15 @@ export default buildConfig({
         Button: '@/components/LogoutButton',
       },
     },
+    meta: {
+      icons: [
+        {
+          rel: 'icon',
+          type: 'image/svg',
+          url: '/favicon.svg',
+        },
+      ],
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },

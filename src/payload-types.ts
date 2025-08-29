@@ -68,10 +68,10 @@ export interface Config {
   blocks: {};
   collections: {
     berita: Berita;
+    dokumentasi: Dokumentasi;
     file: File;
     media: Media;
     pages: Page;
-    penerbitan: Penerbitan;
     users: User;
     redirects: Redirect;
     forms: Form;
@@ -84,10 +84,10 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     berita: BeritaSelect<false> | BeritaSelect<true>;
+    dokumentasi: DokumentasiSelect<false> | DokumentasiSelect<true>;
     file: FileSelect<false> | FileSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
-    penerbitan: PenerbitanSelect<false> | PenerbitanSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -247,6 +247,21 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dokumentasi".
+ */
+export interface Dokumentasi {
+  id: string;
+  image: string | Media;
+  name: string;
+  description: string;
+  publishedAt: string;
+  fileUpload: string | File;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "file".
  */
 export interface File {
@@ -274,21 +289,6 @@ export interface Page {
   hero: {
     type: 'none' | 'home' | 'default';
     title?: string | null;
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
     showLastUpdated?: boolean | null;
     lastUpdated?: string | null;
     links?:
@@ -306,8 +306,8 @@ export interface Page {
                   value: string | Page;
                 } | null)
               | ({
-                  relationTo: 'penerbitan';
-                  value: string | Penerbitan;
+                  relationTo: 'dokumentasi';
+                  value: string | Dokumentasi;
                 } | null);
             url?: string | null;
             label: string;
@@ -367,8 +367,8 @@ export interface Page {
                         value: string | Page;
                       } | null)
                     | ({
-                        relationTo: 'penerbitan';
-                        value: string | Penerbitan;
+                        relationTo: 'dokumentasi';
+                        value: string | Dokumentasi;
                       } | null);
                   url?: string | null;
                   label: string;
@@ -402,27 +402,12 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "penerbitan".
- */
-export interface Penerbitan {
-  id: string;
-  image: string | Media;
-  name: string;
-  description: string;
-  publishedAt: string;
-  fileUpload: string | File;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ArchiveBlock".
  */
 export interface ArchiveBlock {
   title?: string | null;
   populateBy?: ('collection' | 'selection') | null;
-  relationTo?: ('berita' | 'penerbitan') | null;
+  relationTo?: ('berita' | 'dokumentasi') | null;
   limit?: number | null;
   selectedDocs?:
     | (
@@ -431,8 +416,8 @@ export interface ArchiveBlock {
             value: string | Berita;
           }
         | {
-            relationTo: 'penerbitan';
-            value: string | Penerbitan;
+            relationTo: 'dokumentasi';
+            value: string | Dokumentasi;
           }
       )[]
     | null;
@@ -475,8 +460,8 @@ export interface CallToActionBlock {
                 value: string | Page;
               } | null)
             | ({
-                relationTo: 'penerbitan';
-                value: string | Penerbitan;
+                relationTo: 'dokumentasi';
+                value: string | Dokumentasi;
               } | null);
           url?: string | null;
           label: string;
@@ -529,8 +514,8 @@ export interface ContentBlock {
                 value: string | Page;
               } | null)
             | ({
-                relationTo: 'penerbitan';
-                value: string | Penerbitan;
+                relationTo: 'dokumentasi';
+                value: string | Dokumentasi;
               } | null);
           url?: string | null;
           label: string;
@@ -810,8 +795,8 @@ export interface FAQBlock {
                   value: string | Page;
                 } | null)
               | ({
-                  relationTo: 'penerbitan';
-                  value: string | Penerbitan;
+                  relationTo: 'dokumentasi';
+                  value: string | Dokumentasi;
                 } | null);
             url?: string | null;
             label: string;
@@ -1049,6 +1034,10 @@ export interface PayloadLockedDocument {
         value: string | Berita;
       } | null)
     | ({
+        relationTo: 'dokumentasi';
+        value: string | Dokumentasi;
+      } | null)
+    | ({
         relationTo: 'file';
         value: string | File;
       } | null)
@@ -1059,10 +1048,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: string | Page;
-      } | null)
-    | ({
-        relationTo: 'penerbitan';
-        value: string | Penerbitan;
       } | null)
     | ({
         relationTo: 'users';
@@ -1145,6 +1130,20 @@ export interface BeritaSelect<T extends boolean = true> {
   slug?: T;
   slugLock?: T;
   publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dokumentasi_select".
+ */
+export interface DokumentasiSelect<T extends boolean = true> {
+  image?: T;
+  name?: T;
+  description?: T;
+  publishedAt?: T;
+  fileUpload?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1252,7 +1251,6 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         type?: T;
         title?: T;
-        richText?: T;
         showLastUpdated?: T;
         lastUpdated?: T;
         links?:
@@ -1455,20 +1453,6 @@ export interface TenderBlockSelect<T extends boolean = true> {
   desc?: T;
   id?: T;
   blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "penerbitan_select".
- */
-export interface PenerbitanSelect<T extends boolean = true> {
-  image?: T;
-  name?: T;
-  description?: T;
-  publishedAt?: T;
-  fileUpload?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1769,8 +1753,8 @@ export interface Header {
                 value: string | Page;
               } | null)
             | ({
-                relationTo: 'penerbitan';
-                value: string | Penerbitan;
+                relationTo: 'dokumentasi';
+                value: string | Dokumentasi;
               } | null);
           url?: string | null;
           label: string;
@@ -1802,8 +1786,8 @@ export interface Footer {
                 value: string | Page;
               } | null)
             | ({
-                relationTo: 'penerbitan';
-                value: string | Penerbitan;
+                relationTo: 'dokumentasi';
+                value: string | Dokumentasi;
               } | null);
           url?: string | null;
           label: string;

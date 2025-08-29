@@ -33,7 +33,7 @@ export const RenderBlocks: React.FC<{
     return (
       <Fragment>
         {blocks.map((block, index) => {
-          const { blockType } = block
+          const { blockName, blockType } = block
 
           if (blockType && blockType in blockComponents) {
             const Block = blockComponents[blockType]
@@ -41,7 +41,11 @@ export const RenderBlocks: React.FC<{
             if (Block) {
               return heroType === 'home' ? (
                 // add background colour only for home layout
-                <div className={index % 2 === 1 ? 'bg-bg-primary-50' : ''} key={index}>
+                <div
+                  className={index % 2 === 1 ? 'bg-bg-primary-50' : ''}
+                  id={blockName ? blockName : undefined}
+                  key={index}
+                >
                   <Container className="py-8 lg:py-16">
                     {/* @ts-expect-error there may be some mismatch between the expected types here */}
                     <Block {...block} />

@@ -27,8 +27,8 @@ export default async function Page({
   const sanitisedPageNumber = Number(page)
   const sanitisedPageSize = Number(pageSize)
 
-  const penerbitan = await payload.find({
-    collection: 'penerbitan',
+  const dokumentasi = await payload.find({
+    collection: 'dokumentasi',
     depth: 1,
     limit: sanitisedPageSize,
     page: sanitisedPageNumber,
@@ -60,9 +60,9 @@ export default async function Page({
 
       <Container>
         <Section className="flex flex-col gap-8">
-          <CollectionArchive posts={penerbitan.docs} />
+          <CollectionArchive posts={dokumentasi.docs} />
 
-          {penerbitan.totalPages > 1 && (
+          {dokumentasi.totalPages > 1 && (
             <div className="flex flex-col items-center lg:flex-row gap-8 lg:justify-between">
               <div className="flex gap-3 items-center">
                 <p className="text-sm text-txt-black-500 font-medium whitespace-nowrap">
@@ -71,9 +71,9 @@ export default async function Page({
                 <PageSizeSelect options={options} />
               </div>
               <Pagination
-                page={penerbitan.page!}
-                limit={penerbitan.limit}
-                totalPages={penerbitan.totalPages}
+                page={dokumentasi.page!}
+                limit={dokumentasi.limit}
+                totalPages={dokumentasi.totalPages}
               />
             </div>
           )}

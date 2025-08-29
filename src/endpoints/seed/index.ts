@@ -120,8 +120,8 @@ export const seed = async ({
           {
             link: {
               type: 'custom',
-              label: 'Penerbitan',
-              url: '/penerbitan',
+              label: 'Dokumentasi',
+              url: '/dokumentasi',
             },
           },
           {

@@ -39,7 +39,7 @@ export const HomeHero: React.FC<Page['hero']> = (props) => {
   const icon: Record<string, React.FC> = {
     'Latar Belakang': ArrowOutgoingIcon,
     'Senarai Tender': ArrowOutgoingIcon,
-    'Surat Arahan': EmailIcon,
+    'Surat Makluman': EmailIcon,
     'Garis Panduan': QuestionCircleIcon,
     'Manual Pengguna': BookIcon,
     'Soalan Lazim': ArrowOutgoingIcon,
