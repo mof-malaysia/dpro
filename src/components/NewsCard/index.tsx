@@ -56,7 +56,7 @@ export const NewsCard: React.FC<{
           <Link
             href={href}
             ref={link.ref}
-            className="font-semibold line-clamp-2 group-hover:text-txt-primary"
+            className="text-body-lg font-semibold line-clamp-2 group-hover:text-txt-primary"
           >
             {titleToUse}
           </Link>

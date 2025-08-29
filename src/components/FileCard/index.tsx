@@ -150,11 +150,11 @@ export const FileCard: React.FC<{
           <div className="grow flex flex-col gap-3 justify-between">
             <div className="space-y-3">
               {name && (
-                <p className="font-semibold line-clamp-2 group-hover:text-txt-primary">{name}</p>
+                <p className="text-body-lg font-semibold line-clamp-2 group-hover:text-txt-primary">
+                  {name}
+                </p>
               )}
-              {description && (
-                <p className="text-sm text-txt-black-500 line-clamp-2">{description}</p>
-              )}
+              {description && <p className="text-txt-black-500 line-clamp-2">{description}</p>}
             </div>
             <Button
               variant="primary-outline"
