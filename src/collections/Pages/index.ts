@@ -1,5 +1,4 @@
 import type { CollectionConfig } from 'payload'
-
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { Archive } from '@/blocks/ArchiveBlock/config'
@@ -7,6 +6,7 @@ import { CallToAction } from '@/blocks/CallToAction/config'
 import { Content } from '@/blocks/Content/config'
 import { FAQBlock } from '@/blocks/FAQBlock/config'
 import { FormBlock } from '@/blocks/Form/config'
+import { GalleryBlock } from '@/blocks/GalleryBlock/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { TenderBlock } from '@/blocks/TenderBlock/config'
 import { slugField } from '@/fields/slug'
@@ -80,6 +80,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 Archive,
                 CallToAction,
                 Content,
+                GalleryBlock,
                 MediaBlock,
                 FormBlock,
                 FAQBlock,

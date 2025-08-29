@@ -384,7 +384,16 @@ export interface Page {
         }[]
       | null;
   };
-  layout: (ArchiveBlock | CallToActionBlock | ContentBlock | MediaBlock | FormBlock | FAQBlock | TenderBlock)[];
+  layout: (
+    | ArchiveBlock
+    | CallToActionBlock
+    | ContentBlock
+    | GalleryBlock
+    | MediaBlock
+    | FormBlock
+    | FAQBlock
+    | TenderBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -530,6 +539,19 @@ export interface ContentBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'content';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  gallery: {
+    media: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'galleryBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1298,6 +1320,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
+        galleryBlock?: T | GalleryBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         faqBlock?: T | FAQBlockSelect<T>;
@@ -1375,6 +1398,20 @@ export interface ContentBlockSelect<T extends boolean = true> {
               label?: T;
               appearance?: T;
             };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  gallery?:
+    | T
+    | {
+        media?: T;
         id?: T;
       };
   id?: T;
