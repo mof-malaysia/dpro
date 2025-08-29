@@ -253,7 +253,7 @@ export interface Dokumentasi {
   id: string;
   image: string | Media;
   name: string;
-  description: string;
+  description?: string | null;
   publishedAt: string;
   fileUpload: string | File;
   updatedAt: string;
