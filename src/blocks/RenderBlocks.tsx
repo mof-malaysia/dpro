@@ -7,9 +7,11 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FAQBlock } from '@/blocks/FAQBlock/Component'
 import { FormBlock } from '@/blocks/Form/Component'
+import { GalleryBlock } from '@/blocks/GalleryBlock/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { TenderBlock } from '@/blocks/TenderBlock/Component'
 import { Container } from '@/components/ui/container'
+import { cn } from '@/utilities/ui'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -17,6 +19,7 @@ const blockComponents = {
   cta: CallToActionBlock,
   faqBlock: FAQBlock,
   formBlock: FormBlock,
+  galleryBlock: GalleryBlock,
   mediaBlock: MediaBlock,
   tender: TenderBlock,
 }
@@ -42,7 +45,7 @@ export const RenderBlocks: React.FC<{
               return heroType === 'home' ? (
                 // add background colour only for home layout
                 <div
-                  className={index % 2 === 1 ? 'bg-bg-primary-50' : ''}
+                  className={cn('scroll-mt-14', index % 2 === 1 ? 'bg-bg-primary-50' : '')}
                   id={blockName ? blockName : undefined}
                   key={index}
                 >

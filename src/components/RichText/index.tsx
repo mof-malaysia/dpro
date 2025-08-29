@@ -14,14 +14,18 @@ import {
 import type {
   // BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
+  GalleryBlock as GalleryBlockProps,
   MediaBlock as MediaBlockProps,
 } from '@/payload-types'
 // import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+import { GalleryBlock } from '@/blocks/GalleryBlock/Component'
 import { cn } from '@/utilities/ui'
 import { textConverter } from './textConverter'
 
-type NodeTypes = DefaultNodeTypes | SerializedBlockNode<CTABlockProps | MediaBlockProps> // | BannerBlockProps>
+type NodeTypes =
+  | DefaultNodeTypes
+  | SerializedBlockNode<CTABlockProps | GalleryBlockProps | MediaBlockProps> // | BannerBlockProps>
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -38,6 +42,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
   ...textConverter,
   blocks: {
     // banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+    galleryBlock: ({ node }) => <GalleryBlock {...node.fields} />,
     mediaBlock: ({ node }) => (
       <MediaBlock
         className="my-0"

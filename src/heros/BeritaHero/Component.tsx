@@ -44,7 +44,7 @@ export const BeritaHero: React.FC<{
   ]
 
   return (
-    <div className="flex flex-col gap-6 items-center mx-auto lg:max-w-screen-sm px-4.5 lg:px-6">
+    <div className="flex flex-col gap-6 items-center mx-auto max-w-prose px-4.5">
       <div className="flex flex-col gap-6 w-full">
         <Breadcrumb variant="default">
           <BreadcrumbItem>
@@ -84,7 +84,7 @@ export const BeritaHero: React.FC<{
         </div>
       </div>
 
-      <div className="w-full lg:max-w-[740px] h-auto select-none">
+      <div className="w-full max-w-prose h-auto select-none">
         {heroImage && typeof heroImage !== 'string' && (
           <Media
             priority

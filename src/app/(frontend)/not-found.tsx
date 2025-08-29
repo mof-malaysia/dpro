@@ -12,9 +12,9 @@ export default function NotFound() {
         Halaman tidak dijumpai
       </h2>
       <div className="space-y-1">
-        <p className="text-txt-black-700 text-lg">Page not found</p>
-        <p className="text-txt-black-700 text-lg">页面未找到</p>
-        <p className="text-txt-black-700 text-lg">பக்கம் காணப்படவில்லை</p>
+        <p className="text-txt-black-700 text-body-lg">Page not found</p>
+        <p className="text-txt-black-700 text-body-lg">页面未找到</p>
+        <p className="text-txt-black-700 text-body-lg">பக்கம் காணப்படவில்லை</p>
       </div>
       <Button asChild size="lg">
         <Link href="/">

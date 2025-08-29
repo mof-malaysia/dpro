@@ -38,7 +38,6 @@ export const Dokumentasi: CollectionConfig = {
       name: 'description',
       label: 'Keterangan',
       type: 'text',
-      required: true,
     },
     {
       name: 'publishedAt',

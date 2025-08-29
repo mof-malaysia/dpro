@@ -41,7 +41,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     type === 'reference' && reference && typeof reference.value === 'object'
       ? `${reference.relationTo !== 'pages' ? `/${reference.relationTo}` : ''}${
           isDokumentasi(reference.value)
-            ? `?q=${reference.value.name}`
+            ? `?q=${encodeURIComponent(reference.value.name)}`
             : `/${reference?.value.slug}`
         }`
       : url

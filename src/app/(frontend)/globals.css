@@ -90,6 +90,13 @@
   body {
     @apply bg-bg-white text-txt-black-900 min-h-dvh flex flex-col;
   }
+  
+  /* `html` is added to beat the specificity of just `body[data-scroll-locked]` */
+  html body[data-scroll-locked] {
+    overflow: unset !important;
+    margin-right: unset !important;
+    --removed-body-scroll-bar-size: 0 !important;
+  }
 
   :focus:not(:focus-visible) {
     @apply outline-none;
