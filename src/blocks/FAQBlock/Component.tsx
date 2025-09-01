@@ -57,7 +57,7 @@ const Helpdesk: React.FC<FAQBlockProps['helpdesk']> = (props) => {
           )}
         </div>
         <div className="relative p-4.5 space-y-4">
-          <div className="font-semibold">{title}</div>
+          <div className="text-body-lg font-semibold">{title}</div>
 
           {desc && <RichText data={desc} enableGutter={false} className="text-txt-black-500" />}
           {Array.isArray(links) && links.length > 0 && (
