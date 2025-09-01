@@ -176,6 +176,7 @@ const NavbarMobileMenu: FunctionComponent<NavbarMobileMenuProps> = ({ children }
               'data-[state=open]:animate-in data-[state=open]:fade-in-0',
               'data-[state=closed]:animate-out data-[state=closed]:fade-out-0',
             )}
+            onClick={() => setShow(false)}
           />
           <ul
             className={cn(
