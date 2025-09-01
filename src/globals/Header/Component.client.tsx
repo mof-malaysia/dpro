@@ -23,16 +23,16 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
       </Link>
       <HeaderNav data={data} />
       <NavbarAction>
-        <Link
-          href="https://dpro.mof.gov.my/dpro/security/Login.action"
-          target="_blank"
-          className="max-xl:hidden"
-        >
-          <Button variant="primary-fill">
+        <Button variant="primary-fill" asChild>
+          <Link
+            href="https://dpro.mof.gov.my/dpro/security/Login.action"
+            target="_blank"
+            className="max-xl:hidden"
+          >
             <UserIcon />
             Log masuk
-          </Button>
-        </Link>
+          </Link>
+        </Button>
 
         {/* <ThemeSwitch />
         {/* <Button variant="default-ghost" iconOnly aria-label="search-button" size="small">
