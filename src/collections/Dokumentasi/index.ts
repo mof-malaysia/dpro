@@ -1,8 +1,16 @@
 import type { CollectionConfig } from 'payload'
 import { revalidateDokumentasi } from './hooks/revalidateDokumentasi'
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 
 export const Dokumentasi: CollectionConfig = {
   slug: 'dokumentasi',
+  access: {
+    create: authenticated,
+    delete: authenticated,
+    read: authenticatedOrPublished,
+    update: authenticated,
+  },
   labels: {
     singular: 'Dokumentasi',
     plural: 'Dokumentasi',
