@@ -24,16 +24,16 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         )
       })}
       <li className="px-2.5 py-1.5">
-        <Link
-          href="https://dpro.mof.gov.my/dpro/security/Login.action"
-          target="_blank"
-          className="xl:hidden"
-        >
-          <Button variant="primary-fill">
+        <Button variant="primary-fill" asChild>
+          <Link
+            href="https://dpro.mof.gov.my/dpro/security/Login.action"
+            target="_blank"
+            className="xl:hidden"
+          >
             <UserIcon />
             Log masuk
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </li>
     </NavbarMenu>
   )

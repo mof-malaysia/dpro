@@ -96,7 +96,7 @@ export const HomeHero: React.FC<Page['hero']> = (props) => {
               </div>
             </div>
             <Media
-              imgClassName="absolute inset-0 size-full -z-10 object-cover"
+              imgClassName="absolute inset-0 size-full -z-10 object-cover max-sm:object-left"
               priority
               loading="eager"
               resource={media}

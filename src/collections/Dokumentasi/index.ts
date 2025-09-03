@@ -7,6 +7,10 @@ export const Dokumentasi: CollectionConfig = {
     singular: 'Dokumentasi',
     plural: 'Dokumentasi',
   },
+  defaultPopulate: {
+    name: true,
+    fileUpload: true,
+  },
   defaultSort: 'publishedAt',
   timestamps: true,
   versions: {
